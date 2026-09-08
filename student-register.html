@@ -14,7 +14,7 @@
 
     <meta
         name="description"
-        content="Create your EDUVIA student account and request personalized tutoring support based on your subject, academic level and learning needs."
+        content="Create your EDUVIA student account and request personalized tutoring support based on your subjects, academic level and learning needs."
     >
 
     <meta
@@ -331,84 +331,357 @@
             >
 
 
-            <label for="subject">
-                Subject Needed
+            <!-- =========================
+                 SUBJECTS NEEDED
+            ========================== -->
+
+            <label>
+                Subjects Needed
             </label>
 
-            <select
-                id="subject"
-                required
+            <p
+                style="
+                    color:#777;
+                    font-size:14px;
+                    margin-top:-8px;
+                    margin-bottom:15px;
+                "
+            >
+                Tick all the subjects you need help with.
+            </p>
+
+
+            <div
+                id="subjectsContainer"
+                style="
+                    display:grid;
+                    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+                    gap:12px;
+                    margin-bottom:25px;
+                "
             >
 
-                <option value="">
-                    Select subject
-                </option>
-
-                <option value="Mathematics">
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Mathematics"
+                    >
                     Mathematics
-                </option>
+                </label>
 
-                <option value="Further Mathematics">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Further Mathematics"
+                    >
                     Further Mathematics
-                </option>
+                </label>
 
-                <option value="Physics">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Physics"
+                    >
                     Physics
-                </option>
+                </label>
 
-                <option value="Chemistry">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Chemistry"
+                    >
                     Chemistry
-                </option>
+                </label>
 
-                <option value="Biology">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Biology"
+                    >
                     Biology
-                </option>
+                </label>
 
-                <option value="ICT">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="ICT"
+                    >
                     ICT
-                </option>
+                </label>
 
-                <option value="Computer Science">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Computer Science"
+                    >
                     Computer Science
-                </option>
+                </label>
 
-                <option value="Agricultural Science">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Agricultural Science"
+                    >
                     Agricultural Science
-                </option>
+                </label>
 
-                <option value="Environmental Science">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Environmental Science"
+                    >
                     Environmental Science
-                </option>
+                </label>
 
-                <option value="Technical Drawing">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Technical Drawing"
+                    >
                     Technical Drawing
-                </option>
+                </label>
 
-                <option value="English">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="English"
+                    >
                     English
-                </option>
+                </label>
 
-                <option value="French">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="French"
+                    >
                     French
-                </option>
+                </label>
 
-                <option value="Economics">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Economics"
+                    >
                     Economics
-                </option>
+                </label>
 
-                <option value="Geography">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Geography"
+                    >
                     Geography
-                </option>
+                </label>
 
-                <option value="History">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="History"
+                    >
                     History
-                </option>
+                </label>
 
-                <option value="Accounting">
+
+                <label
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        name="subjects"
+                        value="Accounting"
+                    >
                     Accounting
-                </option>
+                </label>
 
-            </select>
+            </div>
+
 
 
             <label for="location">
@@ -817,10 +1090,35 @@ function showMessage(
 
 
 /* =========================
+   GET SELECTED SUBJECTS
+========================= */
+
+function getSelectedSubjects() {
+
+    return Array.from(
+        document.querySelectorAll(
+            'input[name="subjects"]:checked'
+        )
+    )
+    .map(
+        checkbox =>
+            checkbox.value
+    )
+    .join(", ");
+
+}
+
+
+
+/* =========================
    SAVE PENDING REQUEST
 ========================= */
 
 function savePendingRequest() {
+
+    const selectedSubjects =
+        getSelectedSubjects();
+
 
     const requestData = {
 
@@ -850,9 +1148,7 @@ function savePendingRequest() {
             ).value.trim(),
 
         subject:
-            document.getElementById(
-                "subject"
-            ).value,
+            selectedSubjects,
 
         location:
             document.getElementById(
@@ -1194,6 +1490,22 @@ form.addEventListener(
 
 
         message.innerHTML = "";
+
+
+        const selectedSubjects =
+            getSelectedSubjects();
+
+
+        if (!selectedSubjects) {
+
+            showMessage(
+                "Select Your Subjects",
+                "Please tick at least one subject you need help with."
+            );
+
+            return;
+
+        }
 
 
         submitButton.disabled =
