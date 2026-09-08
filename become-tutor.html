@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Become a Tutor | EDUVIA</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        EDUVIA
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="find-tutor.html">Find a Tutor</a>
+        <a href="tutors.html">Tutors</a>
+        <a href="become-tutor.html">Become a Tutor</a>
+        <a href="student-register.html">Register</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <p class="hero-small">
+            JOIN EDUVIA
+        </p>
+
+        <h1>
+            Become a Tutor
+        </h1>
+
+        <p>
+            Create your tutor account and apply to teach
+            students through EDUVIA.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <h2>
+        Tutor Application
+    </h2>
+
+    <p class="section-intro">
+        Complete the form below. Your application will be
+        reviewed by the EDUVIA administration team.
+    </p>
+
+
+    <div class="search-box">
+
+        <form id="tutorForm">
+
+
+            <label for="profilePicture">
+                Profile Picture
+            </label>
+
+            <input
+                type="file"
+                id="profilePicture"
+                accept="image/jpeg,image/png,image/webp"
+                required
+            >
+
+            <p>
+                JPG, PNG or WebP.
+            </p>
+
+            <div id="imagePreview"></div>
+
+
+            <label for="fullName">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="fullName"
+                placeholder="Enter your full name"
+                required
+            >
+
+
+            <label for="phone">
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+                required
+            >
+
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email address"
+                required
+            >
+
+
+            <label for="password">
+                Create Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+                minlength="6"
+                required
+            >
+
+            <p>
+                Password must contain at least 6 characters.
+            </p>
+
+
+            <label for="school">
+                School / Institution
+            </label>
+
+            <input
+                type="text"
+                id="school"
+                placeholder="Enter your school or institution"
+                required
+            >
+
+
+            <label for="level">
+                Current Level
+            </label>
+
+            <select id="level" required>
+
+                <option value="">
+                    Select level
+                </option>
+
+                <option value="Level 1">Level 1</option>
+                <option value="Level 2">Level 2</option>
+                <option value="Level 3">Level 3</option>
+                <option value="Level 4">Level 4</option>
+                <option value="Level 5">Level 5</option>
+                <option value="Graduate">Graduate</option>
+                <option value="Professional">Professional</option>
+
+            </select>
+
+
+            <label for="qualification">
+                Highest Qualification
+            </label>
+
+            <select id="qualification" required>
+
+                <option value="">
+                    Select qualification
+                </option>
+
+                <option value="GCE O Level">
+                    GCE O Level
+                </option>
+
+                <option value="GCE A Level">
+                    GCE A Level
+                </option>
+
+                <option value="HND">
+                    HND
+                </option>
+
+                <option value="Bachelor's Degree">
+                    Bachelor's Degree
+                </option>
+
+                <option value="Master's Degree">
+                    Master's Degree
+                </option>
+
+                <option value="PhD">
+                    PhD
+                </option>
+
+                <option value="Professional Qualification">
+                    Professional Qualification
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <label for="subjects">
+                Subjects You Teach
+            </label>
+
+            <input
+                type="text"
+                id="subjects"
+                placeholder="Example: Mathematics, Physics"
+                required
+            >
+
+
+            <label for="students">
+                Students You Teach
+            </label>
+
+            <select id="students" required>
+
+                <option value="">
+                    Select student level
+                </option>
+
+                <option value="Primary">
+                    Primary
+                </option>
+
+                <option value="Secondary">
+                    Secondary
+                </option>
+
+                <option value="High School">
+                    High School
+                </option>
+
+                <option value="University">
+                    University
+                </option>
+
+                <option value="Professional">
+                    Professional
+                </option>
+
+            </select>
+
+
+            <label for="location">
+                Location
+            </label>
+
+            <select id="location" required>
+
+                <option value="">
+                    Select location
+                </option>
+
+                <option value="Yaoundé">
+                    Yaoundé
+                </option>
+
+                <option value="Douala">
+                    Douala
+                </option>
+
+                <option value="Buea">
+                    Buea
+                </option>
+
+                <option value="Bamenda">
+                    Bamenda
+                </option>
+
+                <option value="Limbe">
+                    Limbe
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <label for="teachingFormat">
+                Teaching Format
+            </label>
+
+            <select id="teachingFormat" required>
+
+                <option value="">
+                    Select teaching format
+                </option>
+
+                <option value="Physical Classes">
+                    Physical Classes
+                </option>
+
+                <option value="Online Classes">
+                    Online Classes
+                </option>
+
+                <option value="Home Tutoring">
+                    Home Tutoring
+                </option>
+
+                <option value="Physical & Online">
+                    Physical & Online
+                </option>
+
+            </select>
+
+
+            <label for="experience">
+                Teaching Experience
+            </label>
+
+            <select id="experience" required>
+
+                <option value="">
+                    Select experience
+                </option>
+
+                <option value="No experience">
+                    No experience
+                </option>
+
+                <option value="Less than 1 year">
+                    Less than 1 year
+                </option>
+
+                <option value="1 - 2 years">
+                    1 - 2 years
+                </option>
+
+                <option value="3 - 5 years">
+                    3 - 5 years
+                </option>
+
+                <option value="More than 5 years">
+                    More than 5 years
+                </option>
+
+            </select>
+
+
+            <label for="about">
+                Tell Us About Yourself
+            </label>
+
+            <textarea
+                id="about"
+                rows="6"
+                placeholder="Tell us about yourself and your teaching abilities"
+                required
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="btn"
+                id="submitButton">
+
+                Create Account & Submit Application
+
+            </button>
+
+        </form>
+
+
+        <div id="message"></div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>
+        EDUVIA
+    </h3>
+
+    <p>
+        Better Learning. Better Results.
+    </p>
+
+    <p>
+        Yaoundé, Cameroon
+    </p>
+
+    <p>
+        +237 672 870 441
+    </p>
+
+    <p>
+        EDUVIACAM@gmail.com
+    </p>
+
+    <p>
+        ©️ 2026 EDUVIA. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const form =
+    document.getElementById("tutorForm");
+
+const message =
+    document.getElementById("message");
+
+const submitButton =
+    document.getElementById("submitButton");
+
+const profilePicture =
+    document.getElementById("profilePicture");
+
+const imagePreview =
+    document.getElementById("imagePreview");
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+profilePicture.addEventListener(
+    "change",
+    function () {
+
+        const file =
+            profilePicture.files[0];
+
+        if (!file) {
+            imagePreview.innerHTML = "";
+            return;
+        }
+
+        const imageURL =
+            URL.createObjectURL(file);
+
+        imagePreview.innerHTML = `
+
+            <img
+                src="${imageURL}"
+                alt="Profile Preview"
+                style="
+                    width:120px;
+                    height:120px;
+                    object-fit:cover;
+                    border-radius:50%;
+                    margin:15px 0;
+                "
+            >
+
+        `;
+
+    }
+);
+
+
+/* =========================
+   SHOW MESSAGE
+========================= */
+
+function showMessage(title, text) {
+
+    message.innerHTML = `
+
+        <div class="card">
+
+            <h3>
+                ${title}
+            </h3>
+
+            <p>
+                ${text}
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   FORM SUBMISSION
+========================= */
+
+form.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+        message.innerHTML = "";
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "Creating Account...";
+
+
+        try {
+
+
+            /* =========================
+               GET FORM DATA
+            ========================= */
+
+            const fullName =
+                document.getElementById(
+                    "fullName"
+                ).value.trim();
+
+            const phone =
+                document.getElementById(
+                    "phone"
+                ).value.trim();
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim();
+
+            const password =
+                document.getElementById(
+                    "password"
+                ).value;
+
+            const school =
+                document.getElementById(
+                    "school"
+                ).value.trim();
+
+            const level =
+                document.getElementById(
+                    "level"
+                ).value;
+
+            const qualification =
+                document.getElementById(
+                    "qualification"
+                ).value;
+
+            const subjects =
+                document.getElementById(
+                    "subjects"
+                ).value.trim();
+
+            const students =
+                document.getElementById(
+                    "students"
+                ).value;
+
+            const location =
+                document.getElementById(
+                    "location"
+                ).value;
+
+            const teachingFormat =
+                document.getElementById(
+                    "teachingFormat"
+                ).value;
+
+            const experience =
+                document.getElementById(
+                    "experience"
+                ).value;
+
+            const about =
+                document.getElementById(
+                    "about"
+                ).value.trim();
+
+
+            /* =========================
+               PROFILE IMAGE
+            ========================= */
+
+            const file =
+                profilePicture.files[0];
+
+            if (!file) {
+
+                throw new Error(
+                    "Please select a profile picture."
+                );
+
+            }
+
+
+            /* =========================
+               UPLOAD IMAGE
+            ========================= */
+
+            submitButton.textContent =
+                "Uploading Profile Picture...";
+
+
+            const fileExtension =
+                file.name
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
+
+
+            const fileName =
+                `${Date.now()}-${Math.random()
+                    .toString(36)
+                    .substring(2)}.${fileExtension}`;
+
+
+            const filePath =
+                `profiles/${fileName}`;
+
+
+            const {
+                error: uploadError
+            } =
+                await supabaseClient
+                    .storage
+                    .from("tutor-profiles")
+                    .upload(
+                        filePath,
+                        file
+                    );
+
+
+            if (uploadError) {
+                throw uploadError;
+            }
+
+
+            /* =========================
+               GET PUBLIC IMAGE URL
+            ========================= */
+
+            const {
+                data: publicURLData
+            } =
+                supabaseClient
+                    .storage
+                    .from("tutor-profiles")
+                    .getPublicUrl(
+                        filePath
+                    );
+
+
+            const profilePictureURL =
+                publicURLData.publicUrl;
+
+
+            /* =========================
+               SAVE APPLICATION LOCALLY
+            ========================= */
+
+            const applicationData = {
+
+                full_name:
+                    fullName,
+
+                phone:
+                    phone,
+
+                email:
+                    email,
+
+                school:
+                    school,
+
+                level:
+                    level,
+
+                qualification:
+                    qualification,
+
+                subjects:
+                    subjects,
+
+                students:
+                    students,
+
+                location:
+                    location,
+
+                teaching_format:
+                    teachingFormat,
+
+                experience:
+                    experience,
+
+                about:
+                    about,
+
+                profile_picture:
+                    profilePictureURL
+
+            };
+
+
+            localStorage.setItem(
+                "eduvia_pending_tutor_application",
+                JSON.stringify(applicationData)
+            );
+
+
+            /* =========================
+               CREATE AUTH ACCOUNT
+            ========================= */
+
+            submitButton.textContent =
+                "Creating Account...";
+
+
+            const {
+                data: authData,
+                error: authError
+            } =
+                await supabaseClient.auth.signUp({
+
+                    email:
+                        email,
+
+                    password:
+                        password,
+
+                    options: {
+
+                       emailRedirectTo:
+    window.location.origin +
+    "/auth-callback.html",
+
+                        data: {
+
+                            full_name:
+                                fullName,
+
+                            phone:
+                                phone,
+
+                            role:
+                                "tutor"
+
+                        }
+
+                    }
+
+                });
+
+
+            if (authError) {
+                throw authError;
+            }
+
+
+            /* =========================
+               EMAIL CONFIRMATION
+            ========================= */
+
+            if (!authData.session) {
+
+                showMessage(
+                    "Check Your Email 📧",
+                    `Your EDUVIA tutor account has been created. We sent a confirmation link to ${email}. Confirm your email to continue your tutor application.`
+                );
+
+
+                form.reset();
+
+
+                imagePreview.innerHTML = "";
+
+                return;
+
+            }
+
+
+            /* =========================
+               IF SESSION EXISTS
+            ========================= */
+
+            await completeTutorApplication();
+
+
+        } catch (error) {
+
+            console.error(
+                "EDUVIA tutor registration error:",
+                error
+            );
+
+
+            showMessage(
+                "Registration Error",
+                error.message
+            );
+
+        } finally {
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "Create Account & Submit Application";
+
+        }
+
+    }
+);
+
+
+/* =========================
+   COMPLETE APPLICATION
+========================= */
+
+async function completeTutorApplication() {
+
+    const pendingData =
+        localStorage.getItem(
+            "eduvia_pending_tutor_application"
+        );
+
+
+    if (!pendingData) {
+        return;
+    }
+
+
+    try {
+
+        const {
+            data: sessionData
+        } =
+            await supabaseClient.auth.getSession();
+
+
+        const session =
+            sessionData.session;
+
+
+        if (!session) {
+            return;
+        }
+
+
+        const applicationData =
+            JSON.parse(pendingData);
+
+
+        const userId =
+            session.user.id;
+
+
+        /* =========================
+           USER PROFILE
+        ========================= */
+
+        const {
+            error: profileError
+        } =
+            await supabaseClient
+                .from("user_profiles")
+                .upsert([
+
+                    {
+
+                        id:
+                            userId,
+
+                        full_name:
+                            applicationData.full_name,
+
+                        email:
+                            applicationData.email,
+
+                        phone:
+                            applicationData.phone,
+
+                        role:
+                            "tutor"
+
+                    }
+
+                ]);
+
+
+        if (profileError) {
+            throw profileError;
+        }
+
+
+        /* =========================
+           TUTOR APPLICATION
+        ========================= */
+
+        const {
+            error: applicationError
+        } =
+            await supabaseClient
+                .from("tutor_applications")
+                .insert([
+
+                    {
+
+                        user_id:
+                            userId,
+
+                        full_name:
+                            applicationData.full_name,
+
+                        phone:
+                            applicationData.phone,
+
+                        email:
+                            applicationData.email,
+
+                        school:
+                            applicationData.school,
+
+                        level:
+                            applicationData.level,
+
+                        qualification:
+                            applicationData.qualification,
+
+                        subjects:
+                            applicationData.subjects,
+
+                        students:
+                            applicationData.students,
+
+                        location:
+                            applicationData.location,
+
+                        teaching_format:
+                            applicationData.teaching_format,
+
+                        experience:
+                            applicationData.experience,
+
+                        about:
+                            applicationData.about,
+
+                        profile_picture:
+                            applicationData.profile_picture,
+
+                        status:
+                            "pending"
+
+                    }
+
+                ]);
+
+
+        if (applicationError) {
+            throw applicationError;
+        }
+
+
+        /* =========================
+           CLEAR PENDING DATA
+        ========================= */
+
+        localStorage.removeItem(
+            "eduvia_pending_tutor_application"
+        );
+
+
+        /* =========================
+           SUCCESS
+        ========================= */
+
+        form.style.display = "none";
+
+
+        showMessage(
+            "Application Submitted 🎉",
+            `Your EDUVIA tutor account has been confirmed and your tutor application has been submitted successfully. Your application is now waiting for admin approval.`
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Application completion error:",
+            error
+        );
+
+
+        showMessage(
+            "Application Error",
+            "Your email has been confirmed, but we could not finish your tutor application. Please contact EDUVIA."
+        );
+
+    }
+
+}
+
+
+/* =========================
+   CHECK SESSION
+========================= */
+
+async function checkForConfirmedAccount() {
+
+    const {
+        data: sessionData
+    } =
+        await supabaseClient.auth.getSession();
+
+
+    if (sessionData.session) {
+
+        await completeTutorApplication();
+
+    }
+
+}
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+supabaseClient.auth.onAuthStateChange(
+    async function(event, session) {
+
+        if (
+            event === "SIGNED_IN" &&
+            session
+        ) {
+
+            await completeTutorApplication();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   INITIAL CHECK
+========================= */
+
+checkForConfirmedAccount();
+
+
+</script>
+
+
+</body>
+
+</html>

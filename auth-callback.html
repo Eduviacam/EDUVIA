@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Confirming Account | EDUVIA</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+</head>
+
+<body>
+
+<section class="admin-login-page">
+
+    <div class="admin-login-box">
+
+        <div class="admin-login-logo">
+            EDUVIA
+        </div>
+
+        <h1 id="title">
+            Confirming Your Account
+        </h1>
+
+        <p id="message">
+            Please wait while we confirm your EDUVIA account...
+        </p>
+
+    </div>
+
+</section>
+
+
+<script>
+
+async function processConfirmation() {
+
+    const title =
+        document.getElementById("title");
+
+    const message =
+        document.getElementById("message");
+
+
+    try {
+
+        /* =========================
+           GET SESSION
+        ========================= */
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.auth.getSession();
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        const session =
+            data.session;
+
+
+        if (!session) {
+
+            title.textContent =
+                "Confirmation Incomplete";
+
+            message.innerHTML = `
+                <p>
+                    We could not find your EDUVIA session.
+                </p>
+
+                <p>
+                    Please make sure you opened the
+                    confirmation link from the same
+                    browser where you registered.
+                </p>
+
+                <a
+                    href="index.html"
+                    class="btn">
+                    Return to EDUVIA
+                </a>
+            `;
+
+            return;
+        }
+
+
+        /* =========================
+           DETERMINE ACCOUNT TYPE
+        ========================= */
+
+        const role =
+            session.user.user_metadata?.role;
+
+
+        /* =========================
+           STUDENT
+        ========================= */
+
+        if (role === "student") {
+
+            await completeStudentRequest(
+                session
+            );
+
+            return;
+        }
+
+
+        /* =========================
+           TUTOR
+        ========================= */
+
+        if (role === "tutor") {
+
+            await completeTutorApplication(
+                session
+            );
+
+            return;
+        }
+
+
+        /* =========================
+           UNKNOWN ROLE
+        ========================= */
+
+        title.textContent =
+            "Account Confirmed 🎉";
+
+        message.innerHTML = `
+
+            <p>
+                Your EDUVIA account has been
+                successfully confirmed.
+            </p>
+
+            <a
+                href="index.html"
+                class="btn">
+                Continue to EDUVIA
+            </a>
+
+        `;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Confirmation error:",
+            error
+        );
+
+
+        title.textContent =
+            "Confirmation Error";
+
+        message.innerHTML = `
+
+            <p>
+                ${error.message}
+            </p>
+
+            <a
+                href="index.html"
+                class="btn">
+                Return to EDUVIA
+            </a>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   STUDENT REQUEST
+========================= */
+
+async function completeStudentRequest(session) {
+
+    const title =
+        document.getElementById("title");
+
+    const message =
+        document.getElementById("message");
+
+
+    const pendingData =
+        localStorage.getItem(
+            "eduvia_pending_student_request"
+        );
+
+
+    if (!pendingData) {
+
+        title.textContent =
+            "Account Confirmed 🎉";
+
+        message.innerHTML = `
+
+            <p>
+                Your student account has been
+                successfully confirmed.
+            </p>
+
+            <p>
+                Your registration information is
+                no longer stored in this browser.
+            </p>
+
+            <a
+                href="student-register.html"
+                class="btn">
+                Register for a Tutor
+            </a>
+
+        `;
+
+        return;
+    }
+
+
+    const requestData =
+        JSON.parse(pendingData);
+
+
+    const userId =
+        session.user.id;
+
+
+    /* =========================
+       USER PROFILE
+    ========================= */
+
+    const {
+        error: profileError
+    } =
+        await supabaseClient
+            .from("user_profiles")
+            .upsert([
+
+                {
+
+                    id:
+                        userId,
+
+                    full_name:
+                        requestData.student_name,
+
+                    email:
+                        requestData.email,
+
+                    phone:
+                        requestData.phone,
+
+                    role:
+                        "student"
+
+                }
+
+            ]);
+
+
+    if (profileError) {
+        throw profileError;
+    }
+
+
+    /* =========================
+       SAVE TUTOR REQUEST
+    ========================= */
+
+    const {
+        error: requestError
+    } =
+        await supabaseClient
+            .from("tutor_requests")
+            .insert([
+
+                {
+
+                    user_id:
+                        userId,
+
+                    student_name:
+                        requestData.student_name,
+
+                    phone:
+                        requestData.phone,
+
+                    email:
+                        requestData.email,
+
+                    academic_level:
+                        requestData.academic_level,
+
+                    school:
+                        requestData.school,
+
+                    subject:
+                        requestData.subject,
+
+                    location:
+                        requestData.location,
+
+                    learning_format:
+                        requestData.learning_format,
+
+                    preferred_tutor:
+                        requestData.preferred_tutor,
+
+                    help_needed:
+                        requestData.help_needed
+
+                }
+
+            ]);
+
+
+    if (requestError) {
+        throw requestError;
+    }
+
+
+    /* =========================
+       CLEAR DATA
+    ========================= */
+
+    localStorage.removeItem(
+        "eduvia_pending_student_request"
+    );
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    title.textContent =
+        "Registration Complete 🎉";
+
+    message.innerHTML = `
+
+        <p>
+            Welcome to EDUVIA,
+            <strong>
+                ${requestData.student_name}
+            </strong>.
+        </p>
+
+        <p>
+            Your email has been confirmed and
+            your tutor request has been submitted.
+        </p>
+
+        <p>
+            EDUVIA will review your request and
+            match you with a suitable tutor.
+        </p>
+
+        <a
+            href="index.html"
+            class="btn">
+            Continue to EDUVIA
+        </a>
+
+    `;
+
+}
+
+
+/* =========================
+   TUTOR APPLICATION
+========================= */
+
+async function completeTutorApplication(session) {
+
+    const title =
+        document.getElementById("title");
+
+    const message =
+        document.getElementById("message");
+
+
+    const pendingData =
+        localStorage.getItem(
+            "eduvia_pending_tutor_application"
+        );
+
+
+    if (!pendingData) {
+
+        title.textContent =
+            "Account Confirmed 🎉";
+
+        message.innerHTML = `
+
+            <p>
+                Your tutor account has been
+                successfully confirmed.
+            </p>
+
+            <a
+                href="become-tutor.html"
+                class="btn">
+                Return to Tutor Application
+            </a>
+
+        `;
+
+        return;
+    }
+
+
+    const applicationData =
+        JSON.parse(pendingData);
+
+
+    const userId =
+        session.user.id;
+
+
+    /* =========================
+       USER PROFILE
+    ========================= */
+
+    const {
+        error: profileError
+    } =
+        await supabaseClient
+            .from("user_profiles")
+            .upsert([
+
+                {
+
+                    id:
+                        userId,
+
+                    full_name:
+                        applicationData.full_name,
+
+                    email:
+                        applicationData.email,
+
+                    phone:
+                        applicationData.phone,
+
+                    role:
+                        "tutor"
+
+                }
+
+            ]);
+
+
+    if (profileError) {
+        throw profileError;
+    }
+
+
+    /* =========================
+       TUTOR APPLICATION
+    ========================= */
+
+    const {
+        error: applicationError
+    } =
+        await supabaseClient
+            .from("tutor_applications")
+            .insert([
+
+                {
+
+                    user_id:
+                        userId,
+
+                    full_name:
+                        applicationData.full_name,
+
+                    phone:
+                        applicationData.phone,
+
+                    email:
+                        applicationData.email,
+
+                    school:
+                        applicationData.school,
+
+                    level:
+                        applicationData.level,
+
+                    qualification:
+                        applicationData.qualification,
+
+                    subjects:
+                        applicationData.subjects,
+
+                    students:
+                        applicationData.students,
+
+                    location:
+                        applicationData.location,
+
+                    teaching_format:
+                        applicationData.teaching_format,
+
+                    experience:
+                        applicationData.experience,
+
+                    about:
+                        applicationData.about,
+
+                    profile_picture:
+                        applicationData.profile_picture,
+
+                    status:
+                        "pending"
+
+                }
+
+            ]);
+
+
+    if (applicationError) {
+        throw applicationError;
+    }
+
+
+    /* =========================
+       CLEAR DATA
+    ========================= */
+
+    localStorage.removeItem(
+        "eduvia_pending_tutor_application"
+    );
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    title.textContent =
+        "Application Submitted 🎉";
+
+    message.innerHTML = `
+
+        <p>
+            Your tutor account has been
+            successfully confirmed.
+        </p>
+
+        <p>
+            Your application has been submitted
+            to the EDUVIA administration team.
+        </p>
+
+        <p>
+            Your application is currently
+            <strong>pending approval</strong>.
+        </p>
+
+        <a
+            href="index.html"
+            class="btn">
+            Continue to EDUVIA
+        </a>
+
+    `;
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+processConfirmation();
+
+</script>
+
+</body>
+
+</html>

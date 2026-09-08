@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Login | EDUVIA</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">EDUVIA</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tutors.html">Tutors</a>
+        <a href="find-tutor.html">Find a Tutor</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+
+<main class="admin-login-page">
+
+    <div class="admin-login-box">
+
+        <div class="admin-login-logo">
+            EDUVIA
+        </div>
+
+        <h1>Student Login</h1>
+
+        <p>
+            Sign in to access your student dashboard,
+            tutor matches and notifications.
+        </p>
+
+
+        <form id="studentLoginForm">
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+
+            <button type="submit" class="btn">
+                Login
+            </button>
+
+        </form>
+
+
+        <div id="loginMessage"></div>
+
+
+        <a href="student-register.html" class="back-home">
+            Create Student Account
+        </a>
+
+        <br>
+
+        <a href="index.html" class="back-home">
+            Back to Home
+        </a>
+
+    </div>
+
+</main>
+
+
+<script>
+
+const form = document.getElementById("studentLoginForm");
+const message = document.getElementById("loginMessage");
+
+
+form.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    message.innerHTML = `
+        <p>Logging in...</p>
+    `;
+
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+
+    try {
+
+        const { data, error } =
+            await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        if (!data.session) {
+            throw new Error(
+                "Login session could not be created."
+            );
+        }
+
+
+        const user = data.session.user;
+
+
+        const {
+            data: profile,
+            error: profileError
+        } = await supabaseClient
+            .from("user_profiles")
+            .select("full_name, role")
+            .eq("id", user.id)
+            .single();
+
+
+        if (profileError) {
+            throw profileError;
+        }
+
+
+        if (profile.role !== "student") {
+
+            await supabaseClient.auth.signOut();
+
+            throw new Error(
+                "This account is not registered as a student."
+            );
+        }
+
+
+        message.innerHTML = `
+            <p class="login-success">
+                Login successful. Opening your dashboard...
+            </p>
+        `;
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "student-dashboard.html";
+
+        }, 800);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.innerHTML = `
+            <p class="login-error">
+                ${error.message}
+            </p>
+        `;
+    }
+
+});
+
+</script>
+
+</body>
+</html>

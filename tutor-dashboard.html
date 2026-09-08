@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tutor Dashboard | EDUVIA</title>
+
+    <meta
+        name="description"
+        content="Manage your EDUVIA tutor profile, matched students and notifications."
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <style>
+
+        /* ================================
+           EDUVIA TUTOR DASHBOARD
+        ================================ */
+
+        .tutor-dashboard-hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0b2d5c 0%,
+                    #164b87 100%
+                );
+            color: white;
+            padding: 70px 6%;
+        }
+
+        .tutor-dashboard-hero .hero-small {
+            color: #f4b400;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        .tutor-dashboard-hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .tutor-dashboard-hero p:last-child {
+            margin: 0;
+            font-size: 18px;
+            opacity: 0.92;
+        }
+
+        .tutor-dashboard-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 6%;
+        }
+
+        .dashboard-welcome-card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+            border: 1px solid #eeeeee;
+        }
+
+        .dashboard-welcome-card h2 {
+            color: #0b2d5c;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-welcome-card p {
+            color: #666;
+            margin: 0;
+        }
+
+        .dashboard-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 22px;
+        }
+
+        .dashboard-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            border: 1px solid #eeeeee;
+        }
+
+        .dashboard-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-panel-header h2 {
+            margin: 0 0 7px;
+            color: #0b2d5c;
+            font-size: 23px;
+        }
+
+        .dashboard-panel-header p {
+            margin: 0;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .dashboard-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            background: #f4b400;
+            color: #0b2d5c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        /* ================================
+           ACCOUNT
+        ================================ */
+
+        .tutor-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .tutor-info-item {
+            background: #f7f9fc;
+            border-radius: 9px;
+            padding: 18px;
+            border: 1px solid #edf0f4;
+        }
+
+        .tutor-info-item span {
+            display: block;
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tutor-info-item strong {
+            color: #222;
+            font-size: 15px;
+            word-break: break-word;
+        }
+
+        /* ================================
+           PROFILE
+        ================================ */
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .profile-image {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #f4b400;
+            flex-shrink: 0;
+        }
+
+        .profile-initials {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            background: #0b2d5c;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 800;
+            border: 3px solid #f4b400;
+            flex-shrink: 0;
+        }
+
+        .profile-header h3 {
+            margin: 0 0 6px;
+            color: #0b2d5c;
+            font-size: 22px;
+        }
+
+        .profile-header p {
+            margin: 0;
+            color: #777;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .profile-item {
+            background: #f7f9fc;
+            border-radius: 9px;
+            padding: 17px;
+        }
+
+        .profile-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .profile-item span {
+            display: block;
+            color: #777;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .profile-item strong {
+            color: #222;
+            font-size: 15px;
+        }
+
+        .profile-about {
+            line-height: 1.7;
+            color: #555;
+            white-space: pre-line;
+        }
+
+        /* ================================
+           STUDENTS
+        ================================ */
+
+        .student-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .student-card {
+            border: 1px solid #e5e9ef;
+            border-radius: 10px;
+            padding: 22px;
+            background: #fafbfc;
+        }
+
+        .student-card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .student-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #0b2d5c;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .student-card-header h3 {
+            margin: 0 0 4px;
+            color: #0b2d5c;
+        }
+
+        .student-card-header p {
+            margin: 0;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .student-details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .student-detail {
+            background: white;
+            padding: 13px 15px;
+            border-radius: 7px;
+        }
+
+        .student-detail strong {
+            display: block;
+            color: #777;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .student-detail span {
+            color: #222;
+            font-size: 14px;
+        }
+
+        /* ================================
+           NOTIFICATIONS
+        ================================ */
+
+        .notification-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .tutor-notification {
+            padding: 20px;
+            border: 1px solid #e7ebf0;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .tutor-notification.unread {
+            border-left: 4px solid #f4b400;
+            background: #fffdf5;
+        }
+
+        .tutor-notification h3 {
+            margin: 0 0 8px;
+            color: #0b2d5c;
+            font-size: 17px;
+        }
+
+        .tutor-notification p {
+            margin: 0 0 8px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .notification-status {
+            font-size: 12px;
+            font-weight: 700;
+            color: #777;
+        }
+
+        /* ================================
+           STATUS
+        ================================ */
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #e9f2ff;
+            color: #0b2d5c;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        /* ================================
+           EMPTY / ERROR / LOADING
+        ================================ */
+
+        .empty-dashboard {
+            text-align: center;
+            padding: 35px 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .empty-dashboard h3 {
+            color: #0b2d5c;
+            margin-bottom: 8px;
+        }
+
+        .empty-dashboard p {
+            color: #777;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .dashboard-loading {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .dashboard-error {
+            padding: 25px;
+            border-radius: 10px;
+            background: #fff4f4;
+            border: 1px solid #f1cccc;
+            color: #a33;
+        }
+
+        .dashboard-error h3 {
+            margin-top: 0;
+        }
+
+        .dashboard-error p {
+            margin-bottom: 20px;
+        }
+
+        /* ================================
+           MOBILE
+        ================================ */
+
+        @media (max-width: 700px) {
+
+            .tutor-dashboard-hero {
+                padding: 50px 20px;
+            }
+
+            .tutor-dashboard-hero h1 {
+                font-size: 32px;
+            }
+
+            .tutor-dashboard-content {
+                padding: 35px 16px;
+            }
+
+            .dashboard-panel {
+                padding: 22px;
+            }
+
+            .tutor-info-grid,
+            .profile-grid,
+            .student-details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-item.full {
+                grid-column: auto;
+            }
+
+            .dashboard-actions {
+                flex-direction: column;
+            }
+
+            .dashboard-actions .btn {
+                width: 100%;
+            }
+
+            .profile-header {
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <a href="index.html" class="logo">
+        EDUVIA
+    </a>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="find-tutor.html">
+            Find a Tutor
+        </a>
+
+        <a href="tutors.html">
+            Tutors
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a
+            href="tutor-dashboard.html"
+            class="active">
+            Dashboard
+        </a>
+
+        <button
+            class="logout-button"
+            id="logoutButton">
+            Logout
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- ================================
+     HERO
+================================ -->
+
+<section class="tutor-dashboard-hero">
+
+    <p class="hero-small">
+        EDUVIA TUTOR PORTAL
+    </p>
+
+    <h1>
+        Tutor Dashboard
+    </h1>
+
+    <p id="welcomeMessage">
+        Loading your account...
+    </p>
+
+</section>
+
+
+<main class="tutor-dashboard-content">
+
+
+    <!-- ================================
+         WELCOME
+    ================================= -->
+
+    <div class="dashboard-welcome-card">
+
+        <h2>
+            Your Teaching Journey
+        </h2>
+
+        <p>
+            Manage your EDUVIA tutor profile,
+            view your matched students and stay
+            updated with important notifications.
+        </p>
+
+        <div class="dashboard-actions">
+
+            <a
+                href="tutors.html"
+                class="btn">
+                View Tutor Directory
+            </a>
+
+            <a
+                href="contact.html"
+                class="btn btn-outline">
+                Contact EDUVIA
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================
+         ACCOUNT
+    ================================= -->
+
+    <section class="dashboard-panel">
+
+        <div class="dashboard-panel-header">
+
+            <div>
+
+                <h2>
+                    My Account
+                </h2>
+
+                <p>
+                    Your EDUVIA tutor account information.
+                </p>
+
+            </div>
+
+            <div class="dashboard-icon">
+                👤
+            </div>
+
+        </div>
+
+
+        <div id="accountInfo">
+
+            <div class="dashboard-loading">
+                Loading account information...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+         TUTOR PROFILE
+    ================================= -->
+
+    <section class="dashboard-panel">
+
+        <div class="dashboard-panel-header">
+
+            <div>
+
+                <h2>
+                    My Tutor Profile
+                </h2>
+
+                <p>
+                    Your public EDUVIA tutor profile.
+                </p>
+
+            </div>
+
+            <div class="dashboard-icon">
+                👨‍🏫
+            </div>
+
+        </div>
+
+
+        <div id="tutorProfile">
+
+            <div class="dashboard-loading">
+                Loading tutor profile...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+         STUDENTS
+    ================================= -->
+
+    <section class="dashboard-panel">
+
+        <div class="dashboard-panel-header">
+
+            <div>
+
+                <h2>
+                    My Students
+                </h2>
+
+                <p>
+                    Students matched with you through EDUVIA.
+                </p>
+
+            </div>
+
+            <div class="dashboard-icon">
+                🎓
+            </div>
+
+        </div>
+
+
+        <div id="myStudents">
+
+            <div class="dashboard-loading">
+                Loading students...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+         NOTIFICATIONS
+    ================================= -->
+
+    <section class="dashboard-panel">
+
+        <div class="dashboard-panel-header">
+
+            <div>
+
+                <h2>
+                    Notifications
+                </h2>
+
+                <p>
+                    Your latest EDUVIA notifications.
+                </p>
+
+            </div>
+
+            <div class="dashboard-icon">
+                🔔
+            </div>
+
+        </div>
+
+
+        <div id="notifications">
+
+            <div class="dashboard-loading">
+                Loading notifications...
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <h3>
+        EDUVIA
+    </h3>
+
+    <p>
+        Better Learning. Better Results.
+    </p>
+
+    <p>
+        Yaoundé, Cameroon
+    </p>
+
+    <p>
+        +237 672 870 441
+    </p>
+
+    <p>
+        EDUVIACAM@gmail.com
+    </p>
+
+    <p>
+        © 2026 EDUVIA. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+
+/* ================================
+   ELEMENTS
+================================ */
+
+const accountInfo =
+    document.getElementById("accountInfo");
+
+const tutorProfile =
+    document.getElementById("tutorProfile");
+
+const myStudents =
+    document.getElementById("myStudents");
+
+const notificationsBox =
+    document.getElementById("notifications");
+
+const welcomeMessage =
+    document.getElementById("welcomeMessage");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+
+/* ================================
+   ESCAPE HTML
+================================ */
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "";
+    }
+
+    return value
+        .toString()
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* ================================
+   STATUS BADGE
+================================ */
+
+function statusBadge(status) {
+
+    return `
+        <span class="status-badge">
+            ${escapeHTML(
+                status || "Pending"
+            )}
+        </span>
+    `;
+
+}
+
+
+/* ================================
+   INITIALS
+================================ */
+
+function getInitials(name) {
+
+    if (!name) {
+        return "T";
+    }
+
+    return name
+        .split(" ")
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(
+            word =>
+                word
+                    .charAt(0)
+                    .toUpperCase()
+        )
+        .join("");
+
+}
+
+
+/* ================================
+   LOAD DASHBOARD
+================================ */
+
+async function loadTutorDashboard() {
+
+    try {
+
+        /* ============================
+           SESSION
+        ============================ */
+
+        const {
+            data: sessionData,
+            error: sessionError
+        } =
+            await supabaseClient.auth.getSession();
+
+
+        if (sessionError) {
+            throw sessionError;
+        }
+
+
+        const session =
+            sessionData.session;
+
+
+        if (!session) {
+
+            window.location.href =
+                "tutor-login.html";
+
+            return;
+
+        }
+
+
+        const user =
+            session.user;
+
+
+        /* ============================
+           USER PROFILE
+        ============================ */
+
+        const {
+            data: profile,
+            error: profileError
+        } =
+            await supabaseClient
+                .from("user_profiles")
+                .select("*")
+                .eq("id", user.id)
+                .single();
+
+
+        if (profileError) {
+            throw profileError;
+        }
+
+
+        /* ============================
+           ROLE CHECK
+        ============================ */
+
+        if (
+            !profile ||
+            profile.role !== "tutor"
+        ) {
+
+            document.querySelector(
+                ".tutor-dashboard-content"
+            ).innerHTML = `
+
+                <div class="dashboard-panel">
+
+                    <div class="dashboard-error">
+
+                        <h3>
+                            Access Denied
+                        </h3>
+
+                        <p>
+                            This dashboard is only available
+                            to tutors.
+                        </p>
+
+                        <a
+                            href="tutor-login.html"
+                            class="btn">
+                            Tutor Login
+                        </a>
+
+                        <a
+                            href="index.html"
+                            class="btn btn-outline">
+                            Return Home
+                        </a>
+
+                    </div>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* ============================
+           WELCOME
+        ============================ */
+
+        welcomeMessage.textContent =
+            `Welcome back, ${
+                profile.full_name || "Tutor"
+            }`;
+
+
+        /* ============================
+           ACCOUNT
+        ============================ */
+
+        accountInfo.innerHTML = `
+
+            <div class="tutor-info-grid">
+
+                <div class="tutor-info-item">
+
+                    <span>
+                        Full Name
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            profile.full_name ||
+                            "Not provided"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="tutor-info-item">
+
+                    <span>
+                        Email Address
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            profile.email ||
+                            user.email ||
+                            "Not provided"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="tutor-info-item">
+
+                    <span>
+                        Phone Number
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            profile.phone ||
+                            "Not provided"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="tutor-info-item">
+
+                    <span>
+                        Account Type
+                    </span>
+
+                    <strong>
+                        Tutor
+                    </strong>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        /* ============================
+           TUTOR APPLICATION
+        ============================ */
+
+        const {
+            data: tutors,
+            error: tutorError
+        } =
+            await supabaseClient
+                .from("tutor_applications")
+                .select("*")
+                .eq("user_id", user.id)
+                .order("id", {
+                    ascending: false
+                })
+                .limit(1);
+
+
+        if (tutorError) {
+            throw tutorError;
+        }
+
+
+        const tutor =
+            tutors && tutors.length
+                ? tutors[0]
+                : null;
+
+
+        /* ============================
+           NO PROFILE
+        ============================ */
+
+        if (!tutor) {
+
+            tutorProfile.innerHTML = `
+
+                <div class="empty-dashboard">
+
+                    <h3>
+                        No Tutor Profile Found
+                    </h3>
+
+                    <p>
+                        Your tutor application could
+                        not be found.
+                    </p>
+
+                </div>
+
+            `;
+
+            myStudents.innerHTML = `
+
+                <div class="empty-dashboard">
+
+                    <h3>
+                        No Students Yet
+                    </h3>
+
+                    <p>
+                        Your matched students will
+                        appear here.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* ============================
+           PROFILE FOUND
+        ============================ */
+
+        else {
+
+            let profileImage;
+
+
+            if (tutor.profile_picture) {
+
+                profileImage = `
+
+                    <img
+                        src="${escapeHTML(
+                            tutor.profile_picture
+                        )}"
+                        class="profile-image"
+                        alt="Tutor profile picture">
+
+                `;
+
+            } else {
+
+                profileImage = `
+
+                    <div class="profile-initials">
+
+                        ${escapeHTML(
+                            getInitials(
+                                tutor.full_name
+                            )
+                        )}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            tutorProfile.innerHTML = `
+
+                <div class="profile-header">
+
+                    ${profileImage}
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(
+                                tutor.full_name ||
+                                "EDUVIA Tutor"
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                tutor.school ||
+                                "School not provided"
+                            )}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-grid">
+
+                    <div class="profile-item">
+
+                        <span>
+                            Current Level
+                        </span>
+
+                        <strong>
+                            ${escapeHTML(
+                                tutor.level ||
+                                "Not provided"
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Location
+                        </span>
+
+                        <strong>
+                            ${escapeHTML(
+                                tutor.location ||
+                                "Not provided"
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Subjects
+                        </span>
+
+                        <strong>
+                            ${escapeHTML(
+                                tutor.subjects ||
+                                "Not provided"
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Students
+                        </span>
+
+                        <strong>
+                            ${escapeHTML(
+                                tutor.students ||
+                                "Not provided"
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Teaching Format
+                        </span>
+
+                        <strong>
+                            ${escapeHTML(
+                                tutor.teaching_format ||
+                                "Not provided"
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Application Status
+                        </span>
+
+                        <strong>
+                            ${statusBadge(
+                                tutor.status ||
+                                "Pending"
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Experience
+                        </span>
+
+                        <strong>
+                            ${escapeHTML(
+                                tutor.experience ||
+                                "Not provided"
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Qualification
+                        </span>
+
+                        <strong>
+                            ${escapeHTML(
+                                tutor.qualification ||
+                                "Not provided"
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-item full">
+
+                        <span>
+                            About Me
+                        </span>
+
+                        <div class="profile-about">
+
+                            ${escapeHTML(
+                                tutor.about ||
+                                "No description provided."
+                            )}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            /* ============================
+               LOAD STUDENTS
+            ============================ */
+
+            await loadStudents(tutor.id);
+
+        }
+
+
+        /* ============================
+           NOTIFICATIONS
+        ============================ */
+
+        await loadNotifications(user);
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Tutor dashboard error:",
+            error
+        );
+
+
+        accountInfo.innerHTML = `
+
+            <div class="dashboard-error">
+
+                <h3>
+                    Dashboard Error
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        error.message ||
+                        "Something went wrong."
+                    )}
+                </p>
+
+                <button
+                    class="btn"
+                    onclick="window.location.reload()">
+                    Try Again
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ================================
+   LOAD STUDENTS
+================================ */
+
+async function loadStudents(tutorId) {
+
+    const {
+        data: matches,
+        error
+    } =
+        await supabaseClient
+            .from("tutor_matches")
+            .select("*")
+            .eq("tutor_id", tutorId)
+            .order("id", {
+                ascending: false
+            });
+
+
+    if (error) {
+
+        myStudents.innerHTML = `
+
+            <div class="dashboard-error">
+
+                <h3>
+                    Student Loading Error
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        error.message
+                    )}
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    if (
+        !matches ||
+        matches.length === 0
+    ) {
+
+        myStudents.innerHTML = `
+
+            <div class="empty-dashboard">
+
+                <h3>
+                    No Students Yet
+                </h3>
+
+                <p>
+                    You do not have any matched students yet.
+                    EDUVIA will notify you when a student
+                    is assigned to you.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    myStudents.innerHTML = `
+
+        <div class="student-list">
+
+            ${
+                matches
+                    .map(
+                        match => {
+
+                            const studentName =
+                                match.student_name ||
+                                "Student";
+
+                            return `
+
+                                <div class="student-card">
+
+                                    <div class="student-card-header">
+
+                                        <div class="student-avatar">
+
+                                            ${escapeHTML(
+                                                getInitials(
+                                                    studentName
+                                                )
+                                            )}
+
+                                        </div>
+
+                                        <div>
+
+                                            <h3>
+                                                ${escapeHTML(
+                                                    studentName
+                                                )}
+                                            </h3>
+
+                                            <p>
+                                                EDUVIA Matched Student
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="student-details-grid">
+
+                                        <div class="student-detail">
+
+                                            <strong>
+                                                Subject
+                                            </strong>
+
+                                            <span>
+                                                ${escapeHTML(
+                                                    match.subject ||
+                                                    "Not provided"
+                                                )}
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="student-detail">
+
+                                            <strong>
+                                                Location
+                                            </strong>
+
+                                            <span>
+                                                ${escapeHTML(
+                                                    match.location ||
+                                                    "Not provided"
+                                                )}
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="student-detail">
+
+                                            <strong>
+                                                Learning Format
+                                            </strong>
+
+                                            <span>
+                                                ${escapeHTML(
+                                                    match.learning_format ||
+                                                    "Not provided"
+                                                )}
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="student-detail">
+
+                                            <strong>
+                                                Match Status
+                                            </strong>
+
+                                            <span>
+                                                ${statusBadge(
+                                                    match.status ||
+                                                    "Matched"
+                                                )}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+                        }
+                    )
+                    .join("")
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* ================================
+   LOAD NOTIFICATIONS
+================================ */
+
+async function loadNotifications(user) {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("notifications")
+            .select("*")
+            .eq(
+                "recipient_type",
+                "tutor"
+            )
+            .eq(
+                "recipient_email",
+                user.email
+            )
+            .order("id", {
+                ascending: false
+            });
+
+
+    if (error) {
+
+        notificationsBox.innerHTML = `
+
+            <div class="dashboard-error">
+
+                <h3>
+                    Notification Error
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        error.message
+                    )}
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        notificationsBox.innerHTML = `
+
+            <div class="empty-dashboard">
+
+                <h3>
+                    No Notifications
+                </h3>
+
+                <p>
+                    You currently have no notifications.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    notificationsBox.innerHTML = `
+
+        <div class="notification-list">
+
+            ${
+                data
+                    .map(
+                        notification => `
+
+                            <div
+                                class="
+                                    tutor-notification
+                                    ${
+                                        notification.is_read
+                                            ? ""
+                                            : "unread"
+                                    }
+                                "
+                            >
+
+                                <h3>
+                                    ${escapeHTML(
+                                        notification.title ||
+                                        "EDUVIA Notification"
+                                    )}
+                                </h3>
+
+
+                                <p>
+                                    ${escapeHTML(
+                                        notification.message ||
+                                        ""
+                                    )}
+                                </p>
+
+
+                                <div class="notification-status">
+
+                                    ${
+                                        notification.is_read
+                                            ? "Read"
+                                            : "Unread"
+                                    }
+
+                                </div>
+
+                            </div>
+
+                        `
+                    )
+                    .join("")
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* ================================
+   LOGOUT
+================================ */
+
+logoutButton.addEventListener(
+    "click",
+    async function () {
+
+        logoutButton.disabled = true;
+
+        logoutButton.textContent =
+            "Logging out...";
+
+
+        try {
+
+            await supabaseClient.auth.signOut();
+
+        }
+
+        finally {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    }
+);
+
+
+/* ================================
+   START
+================================ */
+
+loadTutorDashboard();
+
+</script>
+
+</body>
+
+</html>

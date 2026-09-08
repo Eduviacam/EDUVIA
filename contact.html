@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Contact EDUVIA for tutoring support, student registration, tutor applications and general enquiries.">
+
+    <meta name="keywords"
+        content="EDUVIA contact, tutoring Cameroon, education support Cameroon">
+
+    <title>EDUVIA | Contact Us</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+
+        /* =====================================================
+           CONTACT PAGE
+        ===================================================== */
+
+        .contact-hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0b2d5c,
+                    #174f91
+                );
+            color: white;
+            padding: 80px 20px;
+        }
+
+        .contact-hero-content {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .contact-hero .hero-small {
+            color: #f4b400;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
+
+        .contact-hero h1 {
+            font-size: 44px;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .contact-hero p {
+            max-width: 680px;
+            margin: auto;
+            line-height: 1.8;
+            font-size: 17px;
+            opacity: 0.94;
+        }
+
+
+        .contact-card {
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 12px 28px rgba(0,0,0,0.08);
+        }
+
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #eef4fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: #0b2d5c;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+
+        .contact-link {
+            display: inline-block;
+            margin-top: 4px;
+            color: #0b2d5c;
+            font-weight: 700;
+            text-decoration: none;
+            word-break: break-word;
+        }
+
+        .contact-link:hover {
+            color: #174f91;
+            text-decoration: underline;
+        }
+
+
+        .contact-form-section {
+            background: #f5f7fb;
+        }
+
+
+        .contact-form-box {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid #e7ebf2;
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.05);
+        }
+
+        .contact-form-box h2 {
+            color: #0b2d5c;
+            margin-bottom: 8px;
+        }
+
+        .contact-form-box > p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+
+        .contact-form-box label {
+            display: block;
+            margin: 15px 0 7px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .contact-form-box input,
+        .contact-form-box textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #d7dce5;
+            border-radius: 8px;
+            font: inherit;
+            background: #fff;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .contact-form-box input:focus,
+        .contact-form-box textarea:focus {
+            outline: none;
+            border-color: #174f91;
+            box-shadow:
+                0 0 0 3px rgba(23,79,145,0.10);
+        }
+
+        .contact-form-box textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .contact-submit {
+            margin-top: 22px;
+        }
+
+
+        .contact-message {
+            margin-top: 15px;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+
+        .contact-cta {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0b2d5c,
+                    #174f91
+                );
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .contact-cta h2 {
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .contact-cta p {
+            max-width: 650px;
+            margin: 0 auto 25px;
+            line-height: 1.7;
+            opacity: 0.92;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .contact-hero {
+                padding: 55px 20px;
+            }
+
+            .contact-hero h1 {
+                font-size: 32px;
+            }
+
+            .contact-hero p {
+                font-size: 15px;
+            }
+
+            .contact-form-box {
+                padding: 22px;
+            }
+
+            .contact-cta {
+                padding: 55px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="container nav-container">
+
+        <div class="logo">
+            EDUVIA
+        </div>
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="find-tutor.html">
+                Find a Tutor
+            </a>
+
+            <a href="tutors.html">
+                Tutors
+            </a>
+
+            <a href="become-tutor.html">
+                Become a Tutor
+            </a>
+
+            <a href="student-login.html">
+                Student Login
+            </a>
+
+            <a href="tutor-login.html">
+                Tutor Login
+            </a>
+
+            <a href="contact.html" class="active">
+                Contact
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="contact-hero">
+
+    <div class="contact-hero-content">
+
+        <div class="hero-small">
+            CONTACT EDUVIA
+        </div>
+
+        <h1>
+            We're Here to Help.
+        </h1>
+
+        <p>
+            Have a question about tutoring, registration, or your
+            EDUVIA request? Get in touch with us.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT OPTIONS
+===================================================== -->
+
+<section>
+
+    <div class="section-intro">
+
+        <div class="hero-small">
+            GET IN TOUCH
+        </div>
+
+        <h2>
+            Contact EDUVIA
+        </h2>
+
+        <p>
+            Choose the easiest way to reach our team.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+
+        <!-- WHATSAPP -->
+
+        <div class="card contact-card">
+
+            <div class="contact-icon">
+                W
+            </div>
+
+            <h3>
+                WhatsApp
+            </h3>
+
+            <p>
+                Chat with EDUVIA directly on WhatsApp.
+            </p>
+
+            <p>
+                <a
+                    href="https://wa.me/237655918004"
+                    target="_blank"
+                    rel="noopener"
+                    class="contact-link">
+
+                    +237 655 918 004
+
+                </a>
+            </p>
+
+            <p>
+                <a
+                    href="https://wa.me/237672870441"
+                    target="_blank"
+                    rel="noopener"
+                    class="contact-link">
+
+                    +237 672 870 441
+
+                </a>
+            </p>
+
+            <p>
+                <a
+                    href="https://wa.me/237675710379"
+                    target="_blank"
+                    rel="noopener"
+                    class="contact-link">
+
+                    +237 675 710 379
+
+                </a>
+            </p>
+
+        </div>
+
+
+        <!-- PHONE -->
+
+        <div class="card contact-card">
+
+            <div class="contact-icon">
+                P
+            </div>
+
+            <h3>
+                Phone
+            </h3>
+
+            <p>
+                Call EDUVIA for assistance.
+            </p>
+
+            <p>
+                <a
+                    href="tel:+237655918004"
+                    class="contact-link">
+
+                    +237 655 918 004
+
+                </a>
+            </p>
+
+            <p>
+                <a
+                    href="tel:+237672870441"
+                    class="contact-link">
+
+                    +237 672 870 441
+
+                </a>
+            </p>
+
+            <p>
+                <a
+                    href="tel:+237675710379"
+                    class="contact-link">
+
+                    +237 675 710 379
+
+                </a>
+            </p>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="card contact-card">
+
+            <div class="contact-icon">
+                @
+            </div>
+
+            <h3>
+                Email
+            </h3>
+
+            <p>
+                Send us an email for questions or support.
+            </p>
+
+            <a
+                href="mailto:EDUVIACAM@gmail.com"
+                class="contact-link">
+
+                EDUVIACAM@gmail.com
+
+            </a>
+
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="card contact-card">
+
+            <div class="contact-icon">
+                L
+            </div>
+
+            <h3>
+                Location
+            </h3>
+
+            <p>
+                Yaoundé, Cameroon
+            </p>
+
+            <p>
+                Serving students and tutors through the EDUVIA platform.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT FORM
+===================================================== -->
+
+<section class="contact-form-section">
+
+    <div class="section-intro">
+
+        <div class="hero-small">
+            SEND A MESSAGE
+        </div>
+
+        <h2>
+            How Can We Help?
+        </h2>
+
+        <p>
+            Complete the form below and continue the conversation
+            with EDUVIA on WhatsApp.
+        </p>
+
+    </div>
+
+
+    <div class="contact-form-box">
+
+        <h2>
+            Send Us a Message
+        </h2>
+
+        <p>
+            Once you submit the form, WhatsApp will open with your
+            message ready to send to the EDUVIA team.
+        </p>
+
+
+        <form id="contactForm">
+
+
+            <label for="name">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Your full name"
+                autocomplete="name"
+                required>
+
+
+            <label for="phone">
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Your phone number"
+                autocomplete="tel"
+                required>
+
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Your email address"
+                autocomplete="email">
+
+
+            <label for="message">
+                Message
+            </label>
+
+            <textarea
+                id="message"
+                rows="6"
+                placeholder="How can we help you?"
+                required></textarea>
+
+
+            <button
+                type="submit"
+                class="btn contact-submit">
+
+                Send Message
+
+            </button>
+
+
+            <p
+                id="contactMessage"
+                class="contact-message">
+            </p>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="contact-cta">
+
+    <div class="hero-small">
+        NEED A TUTOR?
+    </div>
+
+    <h2>
+        Start Your Learning Journey
+    </h2>
+
+    <p>
+        Find a tutor that matches your subject, academic level,
+        location, and learning needs.
+    </p>
+
+    <a
+        href="find-tutor.html"
+        class="btn">
+
+        Find a Tutor
+
+    </a>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <h3>
+            EDUVIA
+        </h3>
+
+        <p>
+            Connecting students with tutoring support.
+        </p>
+
+        <p>
+            © 2026 EDUVIA. All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     CONTACT FORM SCRIPT
+===================================================== -->
+
+<script>
+
+const contactForm =
+    document.getElementById("contactForm");
+
+const contactMessage =
+    document.getElementById("contactMessage");
+
+
+contactForm.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document
+                .getElementById("name")
+                .value
+                .trim();
+
+
+        const phone =
+            document
+                .getElementById("phone")
+                .value
+                .trim();
+
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
+
+
+        const message =
+            document
+                .getElementById("message")
+                .value
+                .trim();
+
+
+        if (!name || !phone || !message) {
+
+            contactMessage.textContent =
+                "Please complete the required fields.";
+
+            contactMessage.style.color =
+                "#b00020";
+
+            return;
+        }
+
+
+        const whatsappText =
+            encodeURIComponent(
+
+                `Hello EDUVIA,
+
+My name is ${name}.
+Phone: ${phone}
+Email: ${email || "Not provided"}
+
+Message:
+${message}`
+
+            );
+
+
+        /*
+            EDUVIA CONTACT NUMBER
+            +237 672 870 441
+        */
+
+        const whatsappURL =
+            `https://wa.me/237672870441?text=${whatsappText}`;
+
+
+        contactMessage.textContent =
+            "Opening WhatsApp...";
+
+
+        contactMessage.style.color =
+            "#16803c";
+
+
+        window.open(
+            whatsappURL,
+            "_blank"
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>

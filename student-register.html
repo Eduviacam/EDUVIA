@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Student Account | EDUVIA</title>
+
+    <meta
+        name="description"
+        content="Create your EDUVIA student account and request personalized tutoring support based on your subject, academic level and learning needs."
+    >
+
+    <meta
+        name="keywords"
+        content="EDUVIA student registration, tutor request Cameroon, private tutoring Cameroon, online tutoring, home tutoring"
+    >
+
+    <meta
+        name="author"
+        content="EDUVIA"
+    >
+
+    <meta
+        name="robots"
+        content="index, follow"
+    >
+
+    <meta
+        property="og:title"
+        content="Create a Student Account | EDUVIA"
+    >
+
+    <meta
+        property="og:description"
+        content="Join EDUVIA and request the right tutor for your learning needs."
+    >
+
+    <meta
+        property="og:type"
+        content="website"
+    >
+
+    <meta
+        property="og:site_name"
+        content="EDUVIA"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
+
+    <script src="supabase.js"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================== -->
+
+<header>
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+        EDUVIA
+    </a>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="find-tutor.html">
+            Find a Tutor
+        </a>
+
+        <a href="tutors.html">
+            Tutors
+        </a>
+
+        <a href="become-tutor.html">
+            Become a Tutor
+        </a>
+
+        <a
+            href="student-register.html"
+            class="active"
+        >
+            Register
+        </a>
+
+        <a href="student-login.html">
+            Student Login
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <p class="hero-small">
+            JOIN EDUVIA
+        </p>
+
+
+        <h1>
+            Start Your Learning Journey.
+        </h1>
+
+
+        <p>
+            Create your student account and tell us what
+            kind of academic support you need.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     REGISTRATION SECTION
+========================== -->
+
+<section>
+
+    <div class="section-intro">
+
+        <p class="hero-small">
+            STUDENT REGISTRATION
+        </p>
+
+
+        <h2>
+            Create Your Student Account
+        </h2>
+
+
+        <p>
+            Complete the form below so EDUVIA can understand
+            your learning needs and help you find suitable
+            tutoring support.
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         REGISTRATION FORM
+    ========================== -->
+
+    <div class="search-box">
+
+        <form id="studentForm">
+
+
+            <!-- PERSONAL INFORMATION -->
+
+            <h3
+                style="
+                    color:#0b2d5c;
+                    margin-bottom:20px;
+                "
+            >
+                Personal Information
+            </h3>
+
+
+            <label for="fullName">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="fullName"
+                placeholder="Enter your full name"
+                autocomplete="name"
+                required
+            >
+
+
+            <label for="phone">
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+                autocomplete="tel"
+                required
+            >
+
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email address"
+                autocomplete="email"
+                required
+            >
+
+
+            <label for="password">
+                Create Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+                minlength="6"
+                autocomplete="new-password"
+                required
+            >
+
+            <p
+                style="
+                    color:#777;
+                    font-size:14px;
+                    margin-top:-8px;
+                    margin-bottom:20px;
+                "
+            >
+                Use at least 6 characters.
+            </p>
+
+
+
+            <!-- ACADEMIC INFORMATION -->
+
+            <h3
+                style="
+                    color:#0b2d5c;
+                    margin-top:25px;
+                    margin-bottom:20px;
+                "
+            >
+                Academic Information
+            </h3>
+
+
+            <label for="academicLevel">
+                Academic Level
+            </label>
+
+            <select
+                id="academicLevel"
+                required
+            >
+
+                <option value="">
+                    Select academic level
+                </option>
+
+                <option value="Primary">
+                    Primary
+                </option>
+
+                <option value="Secondary">
+                    Secondary
+                </option>
+
+                <option value="High School">
+                    High School
+                </option>
+
+                <option value="University">
+                    University
+                </option>
+
+                <option value="Professional">
+                    Professional
+                </option>
+
+            </select>
+
+
+            <label for="school">
+                School / Institution
+            </label>
+
+            <input
+                type="text"
+                id="school"
+                placeholder="Enter your school or institution"
+                autocomplete="organization"
+                required
+            >
+
+
+            <label for="subject">
+                Subject Needed
+            </label>
+
+            <select
+                id="subject"
+                required
+            >
+
+                <option value="">
+                    Select subject
+                </option>
+
+                <option value="Mathematics">
+                    Mathematics
+                </option>
+
+                <option value="Further Mathematics">
+                    Further Mathematics
+                </option>
+
+                <option value="Physics">
+                    Physics
+                </option>
+
+                <option value="Chemistry">
+                    Chemistry
+                </option>
+
+                <option value="Biology">
+                    Biology
+                </option>
+
+                <option value="ICT">
+                    ICT
+                </option>
+
+                <option value="Computer Science">
+                    Computer Science
+                </option>
+
+                <option value="Agricultural Science">
+                    Agricultural Science
+                </option>
+
+                <option value="Environmental Science">
+                    Environmental Science
+                </option>
+
+                <option value="Technical Drawing">
+                    Technical Drawing
+                </option>
+
+                <option value="English">
+                    English
+                </option>
+
+                <option value="French">
+                    French
+                </option>
+
+                <option value="Economics">
+                    Economics
+                </option>
+
+                <option value="Geography">
+                    Geography
+                </option>
+
+                <option value="History">
+                    History
+                </option>
+
+                <option value="Accounting">
+                    Accounting
+                </option>
+
+            </select>
+
+
+            <label for="location">
+                Location
+            </label>
+
+            <select
+                id="location"
+                required
+            >
+
+                <option value="">
+                    Select location
+                </option>
+
+                <option value="Yaoundé">
+                    Yaoundé
+                </option>
+
+                <option value="Douala">
+                    Douala
+                </option>
+
+                <option value="Buea">
+                    Buea
+                </option>
+
+                <option value="Bamenda">
+                    Bamenda
+                </option>
+
+                <option value="Limbe">
+                    Limbe
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <label for="learningFormat">
+                Preferred Learning Format
+            </label>
+
+            <select
+                id="learningFormat"
+                required
+            >
+
+                <option value="">
+                    Select learning format
+                </option>
+
+                <option value="Physical Classes">
+                    Physical Classes
+                </option>
+
+                <option value="Online Classes">
+                    Online Classes
+                </option>
+
+                <option value="Home Tutoring">
+                    Home Tutoring
+                </option>
+
+                <option value="Physical & Online">
+                    Physical & Online
+                </option>
+
+            </select>
+
+
+
+            <!-- TUTOR PREFERENCE -->
+
+            <h3
+                style="
+                    color:#0b2d5c;
+                    margin-top:25px;
+                    margin-bottom:20px;
+                "
+            >
+                Tutor Preference
+            </h3>
+
+
+            <label for="preferredTutor">
+                Preferred Tutor
+            </label>
+
+            <input
+                type="text"
+                id="preferredTutor"
+                placeholder="No specific tutor"
+            >
+
+            <p
+                style="
+                    color:#777;
+                    font-size:14px;
+                    margin-top:-8px;
+                    margin-bottom:20px;
+                "
+            >
+                If you came here from a tutor's profile,
+                their name will appear automatically.
+            </p>
+
+
+
+            <!-- LEARNING NEEDS -->
+
+            <label for="helpNeeded">
+                What Do You Need Help With?
+            </label>
+
+            <textarea
+                id="helpNeeded"
+                rows="5"
+                placeholder="Tell us what you are struggling with, what you want to improve, or what you would like the tutor to help you achieve."
+                required
+            ></textarea>
+
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="btn"
+                id="submitButton"
+            >
+                Create Account & Submit Request
+            </button>
+
+        </form>
+
+
+        <!-- MESSAGE -->
+
+        <div id="message"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     WHAT HAPPENS NEXT
+========================== -->
+
+<section class="why-section">
+
+    <div class="section-intro">
+
+        <p class="hero-small">
+            WHAT HAPPENS NEXT
+        </p>
+
+
+        <h2>
+            Your EDUVIA Journey
+        </h2>
+
+
+        <p>
+            Once you submit your information, the process
+            is simple.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h3>
+                01. Create Your Account
+            </h3>
+
+            <p>
+                Your student account is created securely
+                using your email and password.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                02. Confirm Your Email
+            </h3>
+
+            <p>
+                Check your email and click the confirmation
+                link sent by EDUVIA.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                03. EDUVIA Reviews Your Request
+            </h3>
+
+            <p>
+                Your tutoring requirements are saved so
+                EDUVIA can process your request.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                04. Get Matched
+            </h3>
+
+            <p>
+                When a suitable tutor is matched with you,
+                you can view the match from your dashboard.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     LOGIN CTA
+========================== -->
+
+<section class="cta">
+
+    <p class="hero-small">
+        ALREADY REGISTERED?
+    </p>
+
+
+    <h2>
+        Welcome Back to EDUVIA
+    </h2>
+
+
+    <p>
+        Sign in to access your student dashboard
+        and view your tutoring requests.
+    </p>
+
+
+    <a
+        href="student-login.html"
+        class="btn"
+    >
+        Student Login
+    </a>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+    <h3>
+        EDUVIA
+    </h3>
+
+
+    <p>
+        Better Learning. Better Results.
+    </p>
+
+
+    <p>
+        Connecting students with tutors across Cameroon.
+    </p>
+
+
+    <p>
+        Yaoundé, Cameroon
+    </p>
+
+
+    <p>
+        +237 672 870 441
+    </p>
+
+
+    <p>
+        EDUVIACAM@gmail.com
+    </p>
+
+
+    <p>
+        ©️ 2026 EDUVIA. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     STUDENT REGISTRATION LOGIC
+========================== -->
+
+<script>
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const form =
+    document.getElementById(
+        "studentForm"
+    );
+
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+const submitButton =
+    document.getElementById(
+        "submitButton"
+    );
+
+
+
+/* =========================
+   SELECTED TUTOR
+========================= */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const selectedTutor =
+    urlParams.get("tutor");
+
+
+if (selectedTutor) {
+
+    document.getElementById(
+        "preferredTutor"
+    ).value =
+        selectedTutor;
+
+}
+
+
+
+/* =========================
+   SHOW MESSAGE
+========================= */
+
+function showMessage(
+    title,
+    text
+) {
+
+    message.innerHTML = `
+
+        <div
+            class="card"
+            style="
+                margin-top:25px;
+                text-align:center;
+            "
+        >
+
+            <h3>
+                ${title}
+            </h3>
+
+            <p>
+                ${text}
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =========================
+   SAVE PENDING REQUEST
+========================= */
+
+function savePendingRequest() {
+
+    const requestData = {
+
+        student_name:
+            document.getElementById(
+                "fullName"
+            ).value.trim(),
+
+        phone:
+            document.getElementById(
+                "phone"
+            ).value.trim(),
+
+        email:
+            document.getElementById(
+                "email"
+            ).value.trim(),
+
+        academic_level:
+            document.getElementById(
+                "academicLevel"
+            ).value,
+
+        school:
+            document.getElementById(
+                "school"
+            ).value.trim(),
+
+        subject:
+            document.getElementById(
+                "subject"
+            ).value,
+
+        location:
+            document.getElementById(
+                "location"
+            ).value,
+
+        learning_format:
+            document.getElementById(
+                "learningFormat"
+            ).value,
+
+        preferred_tutor:
+            document.getElementById(
+                "preferredTutor"
+            ).value.trim()
+            ||
+            "No specific tutor",
+
+        help_needed:
+            document.getElementById(
+                "helpNeeded"
+            ).value.trim()
+
+    };
+
+
+    localStorage.setItem(
+        "eduvia_pending_student_request",
+        JSON.stringify(
+            requestData
+        )
+    );
+
+}
+
+
+
+/* =========================
+   COMPLETE PENDING REQUEST
+========================= */
+
+async function completePendingRequest() {
+
+    const pendingData =
+        localStorage.getItem(
+            "eduvia_pending_student_request"
+        );
+
+
+    if (!pendingData) {
+        return;
+    }
+
+
+    try {
+
+        const {
+            data: sessionData
+        } =
+            await supabaseClient
+                .auth
+                .getSession();
+
+
+        const session =
+            sessionData.session;
+
+
+        if (!session) {
+            return;
+        }
+
+
+        const requestData =
+            JSON.parse(
+                pendingData
+            );
+
+
+        const userId =
+            session.user.id;
+
+
+
+        /* =========================
+           SAVE USER PROFILE
+        ========================= */
+
+        const {
+            error: profileError
+        } =
+            await supabaseClient
+
+                .from(
+                    "user_profiles"
+                )
+
+                .upsert([
+
+                    {
+
+                        id:
+                            userId,
+
+                        full_name:
+                            requestData.student_name,
+
+                        email:
+                            requestData.email,
+
+                        phone:
+                            requestData.phone,
+
+                        role:
+                            "student"
+
+                    }
+
+                ]);
+
+
+        if (profileError) {
+            throw profileError;
+        }
+
+
+
+        /* =========================
+           CHECK DUPLICATE REQUEST
+        ========================= */
+
+        const {
+            data: existingRequests,
+            error: checkError
+        } =
+            await supabaseClient
+
+                .from(
+                    "tutor_requests"
+                )
+
+                .select("id")
+
+                .eq(
+                    "user_id",
+                    userId
+                )
+
+                .eq(
+                    "subject",
+                    requestData.subject
+                )
+
+                .eq(
+                    "help_needed",
+                    requestData.help_needed
+                )
+
+                .limit(1);
+
+
+        if (checkError) {
+            throw checkError;
+        }
+
+
+
+        /* =========================
+           INSERT REQUEST
+        ========================= */
+
+        if (
+            !existingRequests ||
+            existingRequests.length === 0
+        ) {
+
+            const {
+                error: requestError
+            } =
+                await supabaseClient
+
+                    .from(
+                        "tutor_requests"
+                    )
+
+                    .insert([
+
+                        {
+
+                            user_id:
+                                userId,
+
+                            student_name:
+                                requestData.student_name,
+
+                            phone:
+                                requestData.phone,
+
+                            email:
+                                requestData.email,
+
+                            academic_level:
+                                requestData.academic_level,
+
+                            school:
+                                requestData.school,
+
+                            subject:
+                                requestData.subject,
+
+                            location:
+                                requestData.location,
+
+                            learning_format:
+                                requestData.learning_format,
+
+                            preferred_tutor:
+                                requestData.preferred_tutor,
+
+                            help_needed:
+                                requestData.help_needed
+
+                        }
+
+                    ]);
+
+
+            if (requestError) {
+                throw requestError;
+            }
+
+        }
+
+
+
+        /* =========================
+           REMOVE PENDING DATA
+        ========================= */
+
+        localStorage.removeItem(
+            "eduvia_pending_student_request"
+        );
+
+
+
+        /* =========================
+           SUCCESS
+        ========================= */
+
+        form.style.display =
+            "none";
+
+
+        showMessage(
+            "Registration Complete 🎉",
+            `Your EDUVIA student account has been confirmed and your tutor request has been submitted successfully. Welcome to EDUVIA, ${requestData.student_name}.`
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "EDUVIA request completion error:",
+            error
+        );
+
+
+        showMessage(
+            "Request Error",
+            "Your account is confirmed, but we could not finish your tutor request. Please contact EDUVIA."
+        );
+
+    }
+
+}
+
+
+
+/* =========================
+   CHECK CONFIRMED ACCOUNT
+========================= */
+
+async function checkForConfirmedAccount() {
+
+    const {
+        data: sessionData
+    } =
+        await supabaseClient
+            .auth
+            .getSession();
+
+
+    if (
+        sessionData.session
+    ) {
+
+        await completePendingRequest();
+
+    }
+
+}
+
+
+
+/* =========================
+   AUTH STATE LISTENER
+========================= */
+
+supabaseClient.auth.onAuthStateChange(
+    async function(
+        event,
+        session
+    ) {
+
+        if (
+            event === "SIGNED_IN"
+            &&
+            session
+        ) {
+
+            await completePendingRequest();
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   FORM SUBMISSION
+========================= */
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        message.innerHTML = "";
+
+
+        submitButton.disabled =
+            true;
+
+
+        submitButton.textContent =
+            "Creating Account...";
+
+
+        try {
+
+
+            /* =========================
+               COLLECT DATA
+            ========================= */
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim();
+
+
+            const password =
+                document.getElementById(
+                    "password"
+                ).value;
+
+
+            const fullName =
+                document.getElementById(
+                    "fullName"
+                ).value.trim();
+
+
+            const phone =
+                document.getElementById(
+                    "phone"
+                ).value.trim();
+
+
+
+            /* =========================
+               SAVE REQUEST LOCALLY
+            ========================= */
+
+            savePendingRequest();
+
+
+
+            /* =========================
+               CREATE ACCOUNT
+            ========================= */
+
+            const {
+                data: authData,
+                error: authError
+            } =
+                await supabaseClient
+                    .auth
+                    .signUp({
+
+                        email:
+                            email,
+
+                        password:
+                            password,
+
+                        options: {
+
+                            emailRedirectTo:
+                                window.location.origin +
+                                "/auth-callback.html",
+
+                            data: {
+
+                                full_name:
+                                    fullName,
+
+                                phone:
+                                    phone,
+
+                                role:
+                                    "student"
+
+                            }
+
+                        }
+
+                    });
+
+
+            if (authError) {
+                throw authError;
+            }
+
+
+
+            /* =========================
+               EMAIL CONFIRMATION
+            ========================= */
+
+            if (
+                !authData.session
+            ) {
+
+                showMessage(
+                    "Check Your Email 📧",
+                    `Your EDUVIA student account has been created. We sent a confirmation link to ${email}. Open the email, click the confirmation link, then return to EDUVIA to complete your tutor request.`
+                );
+
+
+                form.reset();
+
+
+                if (selectedTutor) {
+
+                    document.getElementById(
+                        "preferredTutor"
+                    ).value =
+                        selectedTutor;
+
+                }
+
+
+                return;
+
+            }
+
+
+
+            /* =========================
+               SESSION AVAILABLE
+            ========================= */
+
+            await completePendingRequest();
+
+
+        } catch (error) {
+
+            console.error(
+                "EDUVIA student registration error:",
+                error
+            );
+
+
+            showMessage(
+                "Registration Error",
+                error.message
+            );
+
+        } finally {
+
+            submitButton.disabled =
+                false;
+
+
+            submitButton.textContent =
+                "Create Account & Submit Request";
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   INITIAL CHECK
+========================= */
+
+checkForConfirmedAccount();
+
+
+</script>
+
+
+</body>
+
+</html>

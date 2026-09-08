@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EDUVIA Tutors</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">EDUVIA</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="find-tutor.html">Find a Tutor</a>
+        <a href="tutors.html" class="active">Tutors</a>
+        <a href="become-tutor.html">Become a Tutor</a>
+        <a href="student-login.html">Student Login</a>
+        <a href="tutor-login.html">Tutor Login</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-small">EDUVIA TUTOR NETWORK</div>
+
+        <h1>Meet Our Tutors.</h1>
+
+        <p>
+            Explore tutors available through EDUVIA and find
+            the right academic support for your needs.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="find-tutor.html" class="btn">
+                Find a Tutor
+            </a>
+
+            <a href="become-tutor.html" class="btn btn-outline">
+                Become a Tutor
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <div class="section-intro">
+
+        <div class="hero-small">OUR TUTORS</div>
+
+        <h2>Available Tutors</h2>
+
+        <p>
+            These are tutors whose applications have been approved
+            by EDUVIA.
+        </p>
+
+    </div>
+
+
+    <div
+        id="tutorsContainer"
+        class="tutor-grid">
+
+        <div class="loading">
+            Loading tutors...
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="cta">
+
+    <div class="hero-small">CAN'T FIND WHAT YOU NEED?</div>
+
+    <h2>Tell EDUVIA What You Need</h2>
+
+    <p>
+        Submit a tutoring request and let us help you find a suitable tutor.
+    </p>
+
+    <a href="student-register.html" class="btn">
+        Request a Tutor
+    </a>
+
+</section>
+
+
+<footer>
+
+    <h3>EDUVIA</h3>
+
+    <p>
+        Connecting students with tutoring support.
+    </p>
+
+    <p>
+        © 2026 EDUVIA. All rights reserved.
+    </p>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+
+<script>
+
+const tutorsContainer =
+    document.getElementById("tutorsContainer");
+
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function getInitials(name) {
+
+    return String(name || "Tutor")
+        .trim()
+        .split(/\s+/)
+        .slice(0, 2)
+        .map(word => word.charAt(0))
+        .join("")
+        .toUpperCase();
+}
+
+
+async function loadTutors() {
+
+    tutorsContainer.innerHTML =
+        `<div class="loading">Loading tutors...</div>`;
+
+
+    const { data, error } = await supabaseClient
+
+        .from("tutor_applications")
+
+        .select(`
+            id,
+            full_name,
+            school,
+            level,
+            subjects,
+            location,
+            teaching_format,
+            profile_picture
+        `)
+
+        .eq("status", "approved")
+
+        .order("id", {
+            ascending: false
+        });
+
+
+    if (error) {
+
+        console.error(error);
+
+        tutorsContainer.innerHTML = `
+            <div class="empty-state">
+                <h3>Unable to load tutors</h3>
+                <p>Please try again later.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    if (!data || data.length === 0) {
+
+        tutorsContainer.innerHTML = `
+            <div class="empty-state">
+                <h3>No tutors available yet</h3>
+                <p>
+                    New tutors will appear here after their applications
+                    are approved.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    tutorsContainer.innerHTML = data.map(tutor => {
+
+        const name =
+            escapeHTML(tutor.full_name || "EDUVIA Tutor");
+
+        const school =
+            escapeHTML(tutor.school || "Not provided");
+
+        const level =
+            escapeHTML(tutor.level || "Not provided");
+
+        const subjects =
+            escapeHTML(tutor.subjects || "Not provided");
+
+        const location =
+            escapeHTML(tutor.location || "Not provided");
+
+        const format =
+            escapeHTML(tutor.teaching_format || "Not provided");
+
+        const initials =
+            escapeHTML(getInitials(tutor.full_name));
+
+        const tutorName =
+            encodeURIComponent(tutor.full_name || "");
+
+
+        const profileImage = tutor.profile_picture
+            ? `
+                <img
+                    src="${escapeHTML(tutor.profile_picture)}"
+                    alt="${name}"
+                    style="
+                        width:90px;
+                        height:90px;
+                        border-radius:50%;
+                        object-fit:cover;
+                        margin-bottom:20px;
+                    ">
+              `
+            : `
+                <div class="tutor-avatar">
+                    ${initials}
+                </div>
+              `;
+
+
+        return `
+
+            <div class="tutor-card">
+
+                ${profileImage}
+
+                <h3>${name}</h3>
+
+                <p>
+                    <strong>School:</strong>
+                    ${school}
+                </p>
+
+                <p>
+                    <strong>Level:</strong>
+                    ${level}
+                </p>
+
+                <p>
+                    <strong>Subjects:</strong>
+                    ${subjects}
+                </p>
+
+                <p>
+                    <strong>Location:</strong>
+                    ${location}
+                </p>
+
+                <p>
+                    <strong>Format:</strong>
+                    ${format}
+                </p>
+
+                <br>
+
+                <a
+                    href="student-register.html?tutor=${tutorName}"
+                    class="btn">
+                    Request Tutor
+                </a>
+
+            </div>
+
+        `;
+
+    }).join("");
+
+}
+
+
+loadTutors();
+
+</script>
+
+</body>
+</html>
