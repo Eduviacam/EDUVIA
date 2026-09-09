@@ -21,6 +21,7 @@ body {
 
 img {
     max-width: 100%;
+    display: block;
 }
 
 a {
@@ -34,6 +35,32 @@ textarea {
     font: inherit;
 }
 
+/* =========================================================
+   TOP INFORMATION BAR
+========================================================= */
+
+.top-bar {
+    min-height: 38px;
+    padding: 8px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: #0b2d5c;
+    color: white;
+    font-size: 13px;
+}
+
+.top-bar-contact {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.top-bar-message {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
 
 /* =========================================================
    HEADER
@@ -41,10 +68,10 @@ textarea {
 
 header {
     min-height: 75px;
-    padding: 18px 6%;
+    padding: 12px 6%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 15px;
     background: #ffffff;
     position: sticky;
     top: 0;
@@ -52,26 +79,79 @@ header {
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
 }
 
+/* EDUVIA IMAGE LOGO */
+
 .logo {
-    font-size: 28px;
-    font-weight: 800;
-    color: #0b2d5c;
-    letter-spacing: 1px;
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    text-decoration: none;
 }
+
+.logo img {
+    width: 165px;
+    height: auto;
+    max-height: 60px;
+    object-fit: contain;
+}
+
+/* BRAND TEXT */
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: auto;
+    line-height: 1.2;
+}
+
+.brand-text strong {
+    color: #0b2d5c;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.brand-text span {
+    color: #777;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 3px;
+}
+
+/* NAVIGATION */
 
 header nav {
     display: flex;
     align-items: center;
-    gap: 22px;
+    justify-content: flex-end;
+    gap: 18px;
 }
 
 header nav a {
+    position: relative;
+    padding: 8px 2px;
     color: #333;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     transition: 0.2s ease;
+}
+
+header nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #f4b400;
+    transition: width 0.2s ease;
+}
+
+header nav a:hover::after,
+header nav a.active::after {
+    width: 100%;
 }
 
 header nav a:hover,
@@ -79,9 +159,28 @@ header nav a.active {
     color: #0b2d5c;
 }
 
+/* STUDENT LOGIN BUTTON */
+
+header nav a.student-login-button {
+    background: #f4b400;
+    color: #111;
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: 2px solid #f4b400;
+}
+
+header nav a.student-login-button::after {
+    display: none;
+}
+
+header nav a.student-login-button:hover {
+    background: #d99e00;
+    border-color: #d99e00;
+    color: #111;
+}
 
 /* =========================================================
-   HERO
+   ORIGINAL / SHARED HERO
 ========================================================= */
 
 .hero {
@@ -141,16 +240,311 @@ header nav a.active {
     margin-left: 5px;
 }
 
+/* =========================================================
+   NEW HOMEPAGE HERO
+========================================================= */
+
+.home-hero {
+    min-height: 570px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    background: #0b2d5c;
+}
+
+/* LEFT HERO PANEL */
+
+.home-hero-image {
+    min-height: 570px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 65px 8%;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7, 30, 60, 0.35),
+            rgba(7, 30, 60, 0.9)
+        ),
+        linear-gradient(
+            120deg,
+            #7296ad 0%,
+            #486d85 45%,
+            #203f5c 100%
+        );
+}
+
+/*
+   Decorative background shapes.
+   This gives the hero visual depth even before
+   a dedicated study photograph is added.
+*/
+
+.home-hero-image::before {
+    content: "";
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    right: -120px;
+    top: -120px;
+    border: 55px solid rgba(244, 180, 0, 0.18);
+    border-radius: 50%;
+}
+
+.home-hero-image::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    left: -100px;
+    bottom: -130px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+}
+
+.hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            180deg,
+            transparent 20%,
+            rgba(5, 22, 44, 0.78) 100%
+        );
+}
+
+.hero-image-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    max-width: 570px;
+}
+
+.hero-image-content p {
+    color: #f4b400;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.hero-image-content h1 {
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.08;
+    margin: 0;
+}
+
+/* RIGHT HERO PANEL */
+
+.home-hero-content {
+    min-height: 570px;
+    padding: 55px 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #0b2d5c;
+    color: white;
+}
+
+.hero-logo {
+    width: 125px;
+    max-height: 75px;
+    object-fit: contain;
+    margin-bottom: 18px;
+}
+
+.home-hero-content .hero-small {
+    margin-bottom: 14px;
+}
+
+.home-hero-content h2 {
+    color: white;
+    text-align: left;
+    font-size: clamp(34px, 4vw, 48px);
+    line-height: 1.12;
+    margin-bottom: 20px;
+}
+
+.hero-description {
+    max-width: 550px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.home-hero-content .hero-buttons {
+    justify-content: flex-start;
+}
+
+.home-hero-content .hero-secondary-link {
+    margin-top: 22px;
+}
+
+/* =========================================================
+   HOMEPAGE FEATURE ROW
+========================================================= */
+
+.home-features {
+    padding: 30px 7%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: white;
+    border-bottom: 1px solid #e6eaf0;
+}
+
+.home-feature {
+    min-height: 90px;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-right: 1px solid #e4e8ee;
+}
+
+.home-feature:last-child {
+    border-right: none;
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff5d6;
+    border-radius: 50%;
+    font-size: 22px;
+}
+
+.home-feature h3 {
+    color: #123c69;
+    font-size: 16px;
+    margin-bottom: 3px;
+}
+
+.home-feature p {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   HOMEPAGE INTRODUCTION
+========================================================= */
+
+.home-introduction {
+    padding: 85px 8%;
+    background: white;
+}
+
+.home-introduction .section-intro {
+    max-width: 800px;
+}
+
+.home-introduction .hero-small {
+    text-align: center;
+}
+
+.home-introduction h2 {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 18px;
+}
+
+.home-introduction .section-intro > p:last-child {
+    color: #666;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   HOMEPAGE SERVICES
+========================================================= */
+
+.home-services {
+    background: #f7f9fc;
+    text-align: center;
+}
+
+.home-services > .hero-small,
+.why-section > .hero-small,
+.how-section > .hero-small,
+.home-contact > .hero-small {
+    text-align: center;
+}
+
+.home-services > .section-intro,
+.why-section > .section-intro,
+.how-section > .section-intro,
+.home-contact > .section-intro {
+    margin-bottom: 35px;
+}
+
+/* =========================================================
+   HOMEPAGE TUTOR SECTION
+========================================================= */
+
+.home-tutor-section {
+    background: white;
+    text-align: center;
+}
+
+.home-tutor-section .section-intro {
+    max-width: 800px;
+}
+
+.home-tutor-section .hero-buttons {
+    justify-content: center;
+}
+
+/* =========================================================
+   HOMEPAGE CONTACT
+========================================================= */
+
+.home-contact {
+    background: #f7f9fc;
+    text-align: center;
+}
+
+.home-contact .cards {
+    margin-top: 35px;
+}
+
+.home-contact .card {
+    text-align: center;
+}
+
+.home-contact .card p {
+    margin-bottom: 8px;
+}
+
+.home-contact .card a:not(.btn) {
+    color: #123c69;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.home-contact .card a:not(.btn):hover {
+    text-decoration: underline;
+}
 
 /* =========================================================
    BUTTONS
 ========================================================= */
 
 .btn {
-    display: inline-block;
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     background: #f4b400;
     color: #111;
-    padding: 13px 25px;
+    padding: 12px 24px;
     border: 2px solid #f4b400;
     border-radius: 7px;
     text-decoration: none;
@@ -162,6 +556,7 @@ header nav a.active {
 .btn:hover {
     transform: translateY(-2px);
     opacity: 0.92;
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
 }
 
 .btn:active {
@@ -184,7 +579,6 @@ button.btn:disabled {
     cursor: not-allowed;
     transform: none;
 }
-
 
 /* =========================================================
    SECTIONS
@@ -215,7 +609,6 @@ section h2 {
 .section-intro p + p {
     margin-top: 15px;
 }
-
 
 /* =========================================================
    CARDS
@@ -269,7 +662,6 @@ section h2 {
     text-decoration: none;
 }
 
-
 /* =========================================================
    WHY SECTION
 ========================================================= */
@@ -278,6 +670,13 @@ section h2 {
     background: #eef4f9;
 }
 
+/* =========================================================
+   HOW SECTION
+========================================================= */
+
+.how-section {
+    background: white;
+}
 
 /* =========================================================
    CTA
@@ -307,6 +706,9 @@ section h2 {
     color: #f4b400;
 }
 
+.home-student-cta .hero-buttons {
+    justify-content: center;
+}
 
 /* =========================================================
    FORMS
@@ -367,7 +769,6 @@ form input::placeholder,
 form textarea::placeholder {
     color: #999;
 }
-
 
 /* =========================================================
    TUTOR GRID
@@ -443,7 +844,6 @@ form textarea::placeholder {
     margin: 0 auto 20px;
 }
 
-
 /* =========================================================
    FOOTER
 ========================================================= */
@@ -474,7 +874,6 @@ footer a:hover {
     color: white;
     text-decoration: underline;
 }
-
 
 /* =========================================================
    SHARED AUTH PAGES
@@ -510,7 +909,6 @@ footer a:hover {
     color: #666;
     margin-bottom: 30px;
 }
-
 
 /* =========================================================
    ADMIN DASHBOARD
@@ -667,7 +1065,6 @@ footer a:hover {
     color: #b00020;
 }
 
-
 /* =========================================================
    ADMIN LOGIN
 ========================================================= */
@@ -757,7 +1154,6 @@ footer a:hover {
     font-weight: 600;
 }
 
-
 /* =========================================================
    LOGOUT
 ========================================================= */
@@ -776,7 +1172,6 @@ footer a:hover {
 .logout-button:hover {
     opacity: 0.9;
 }
-
 
 /* =========================================================
    ADMIN ACTIONS
@@ -817,7 +1212,6 @@ footer a:hover {
 .reject-button:hover {
     opacity: 0.9;
 }
-
 
 /* =========================================================
    DASHBOARDS
@@ -874,7 +1268,6 @@ footer a:hover {
     margin-top: 10px;
 }
 
-
 /* =========================================================
    STATUS BADGES
 ========================================================= */
@@ -889,7 +1282,6 @@ footer a:hover {
     font-weight: 700;
     text-transform: capitalize;
 }
-
 
 /* =========================================================
    NOTIFICATIONS
@@ -921,7 +1313,6 @@ footer a:hover {
     color: #555;
 }
 
-
 /* =========================================================
    CONTACT
 ========================================================= */
@@ -930,7 +1321,6 @@ footer a:hover {
     max-width: 1200px;
     margin: 0 auto;
 }
-
 
 /* =========================================================
    ACCESSIBILITY
@@ -945,16 +1335,60 @@ textarea:focus-visible {
     outline-offset: 2px;
 }
 
-
 /* =========================================================
    RESPONSIVE DESIGN
 ========================================================= */
+
+@media (max-width: 1100px) {
+
+    header {
+        gap: 10px;
+    }
+
+    .brand-text {
+        display: none;
+    }
+
+    header nav {
+        gap: 14px;
+    }
+
+    header nav a {
+        font-size: 12px;
+    }
+
+    .home-hero {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .home-feature {
+        padding: 15px;
+    }
+
+    .home-feature p {
+        font-size: 11px;
+    }
+}
 
 @media (max-width: 1000px) {
 
     header {
         flex-direction: column;
         gap: 15px;
+        position: relative;
+    }
+
+    .brand-text {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-right: 0;
+    }
+
+    header nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
     .cards {
@@ -964,24 +1398,64 @@ textarea:focus-visible {
     .hero h1 {
         font-size: 50px;
     }
-}
 
+    .home-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .home-hero-image,
+    .home-hero-content {
+        min-height: 500px;
+    }
+
+    .home-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-feature:nth-child(2) {
+        border-right: none;
+    }
+
+    .home-feature:nth-child(-n + 2) {
+        border-bottom: 1px solid #e4e8ee;
+    }
+}
 
 @media (max-width: 850px) {
 
+    .top-bar {
+        padding: 8px 20px;
+        flex-direction: column;
+        gap: 4px;
+        text-align: center;
+    }
+
+    .top-bar-contact {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+    }
+
     header {
-        padding: 18px 20px;
+        padding: 16px 20px;
+        gap: 12px;
+    }
+
+    .logo img {
+        width: 150px;
+        max-height: 55px;
     }
 
     header nav {
         width: 100%;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 12px 18px;
+        gap: 8px 16px;
     }
 
     header nav a {
-        font-size: 14px;
+        font-size: 13px;
+        padding: 6px 2px;
     }
 
     .dashboard-grid {
@@ -1008,8 +1482,11 @@ textarea:focus-visible {
         flex-direction: column;
         align-items: flex-start;
     }
-}
 
+    .home-hero-content {
+        padding: 55px 7%;
+    }
+}
 
 @media (max-width: 700px) {
 
@@ -1024,26 +1501,60 @@ textarea:focus-visible {
     .admin-card-top {
         align-items: flex-start;
     }
-}
 
+    .home-features {
+        grid-template-columns: 1fr;
+    }
+
+    .home-feature {
+        border-right: none;
+        border-bottom: 1px solid #e4e8ee;
+    }
+
+    .home-feature:last-child {
+        border-bottom: none;
+    }
+
+    .home-hero-image,
+    .home-hero-content {
+        min-height: 470px;
+    }
+
+    .home-hero-image {
+        padding: 50px 7%;
+    }
+}
 
 @media (max-width: 600px) {
 
     header {
         position: relative;
-        padding: 15px;
+        padding: 15px 14px;
     }
 
-    .logo {
-        font-size: 25px;
+    .logo img {
+        width: 140px;
+        max-height: 52px;
+    }
+
+    .brand-text strong {
+        font-size: 16px;
+    }
+
+    .brand-text span {
+        font-size: 8px;
     }
 
     header nav {
-        gap: 10px 14px;
+        gap: 7px 13px;
     }
 
     header nav a {
-        font-size: 13px;
+        font-size: 12px;
+    }
+
+    header nav a.student-login-button {
+        padding: 8px 13px;
     }
 
     section {
@@ -1131,8 +1642,47 @@ textarea:focus-visible {
     .reject-button {
         width: 100%;
     }
-}
 
+    .btn {
+        min-height: 48px;
+        padding: 12px 20px;
+    }
+
+    .top-bar-contact {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .top-bar-message {
+        font-size: 11px;
+    }
+
+    .home-hero-image {
+        min-height: 400px;
+        padding: 45px 7%;
+    }
+
+    .home-hero-content {
+        min-height: 520px;
+        padding: 45px 7%;
+    }
+
+    .hero-image-content h1 {
+        font-size: 40px;
+    }
+
+    .home-hero-content h2 {
+        font-size: 34px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .hero-logo {
+        width: 105px;
+    }
+}
 
 @media (max-width: 500px) {
 
@@ -1155,138 +1705,34 @@ textarea:focus-visible {
     .dashboard-card {
         padding: 22px;
     }
-}/* ================================
-   EDUVIA NAVIGATION POLISH
-================================ */
 
-header {
-    min-height: 72px;
-    padding: 14px 6%;
-}
-
-.logo {
-    font-size: 30px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    color: #0b2d5c;
-}
-
-header nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-header nav a {
-    position: relative;
-    padding: 8px 2px;
-    color: #333;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-header nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background: #f4b400;
-    transition: width 0.2s ease;
-}
-
-header nav a:hover::after,
-header nav a.active::after {
-    width: 100%;
-}
-
-header nav a.active {
-    color: #0b2d5c;
-}
-
-
-/* ================================
-   BETTER BUTTONS
-================================ */
-
-.btn {
-    min-height: 46px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 12px 24px;
-    border-radius: 7px;
-    font-size: 15px;
-}
-
-.btn:hover {
-    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
-}
-
-
-/* ================================
-   MOBILE NAVIGATION
-================================ */
-
-@media (max-width: 850px) {
-
-    header {
-        padding: 16px 20px;
-        gap: 12px;
+    .home-hero-image {
+        min-height: 370px;
     }
 
-    .logo {
-        font-size: 28px;
+    .home-hero-content {
+        min-height: 500px;
     }
 
-    header nav {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 8px 16px;
+    .hero-image-content h1 {
+        font-size: 34px;
     }
 
-    header nav a {
-        font-size: 13px;
-        padding: 6px 2px;
-    }
-}
-
-
-@media (max-width: 600px) {
-
-    header {
-        padding: 15px 14px;
+    .home-hero-content h2 {
+        font-size: 30px;
     }
 
-    .logo {
-        font-size: 26px;
-    }
-
-    header nav {
-        gap: 7px 13px;
-    }
-
-    header nav a {
-        font-size: 12px;
-    }
-
-    .btn {
-        min-height: 48px;
-        padding: 12px 20px;
+    .home-introduction {
+        padding: 65px 6%;
     }
 }
-
-
-/* ================================
-   SMALL PHONE SCREENS
-================================ */
 
 @media (max-width: 420px) {
+
+    .logo img {
+        width: 130px;
+        max-height: 50px;
+    }
 
     header nav {
         gap: 6px 11px;
@@ -1296,7 +1742,29 @@ header nav a.active {
         font-size: 11px;
     }
 
-    .logo {
-        font-size: 25px;
+    header nav a.student-login-button {
+        padding: 7px 10px;
+    }
+
+    .home-hero-image {
+        min-height: 350px;
+        padding: 40px 6%;
+    }
+
+    .home-hero-content {
+        min-height: 510px;
+        padding: 40px 6%;
+    }
+
+    .hero-image-content h1 {
+        font-size: 31px;
+    }
+
+    .home-hero-content h2 {
+        font-size: 28px;
+    }
+
+    .home-feature {
+        padding: 15px 5px;
     }
 }
