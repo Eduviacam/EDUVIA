@@ -242,6 +242,119 @@
         }
 
         /* ================================
+           EDIT PROFILE
+        ================================ */
+
+        .edit-profile-form {
+            display: grid;
+            gap: 18px;
+        }
+
+        .edit-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .edit-form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edit-form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .edit-form-group label {
+            color: #0b2d5c;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .edit-form-group input,
+        .edit-form-group textarea,
+        .edit-form-group select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #dce2e9;
+            border-radius: 8px;
+            background: white;
+            color: #222;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .edit-form-group input:focus,
+        .edit-form-group textarea:focus,
+        .edit-form-group select:focus {
+            border-color: #0b2d5c;
+            box-shadow: 0 0 0 3px rgba(11, 45, 92, 0.08);
+        }
+
+        .edit-form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .email-readonly {
+            background: #f1f3f6 !important;
+            color: #777 !important;
+            cursor: not-allowed;
+        }
+
+        .edit-help-text {
+            color: #777;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .edit-profile-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .edit-profile-message {
+            padding: 13px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .edit-profile-message.success {
+            display: block;
+            background: #edf9f1;
+            border: 1px solid #bfe5c9;
+            color: #216b36;
+        }
+
+        .edit-profile-message.error {
+            display: block;
+            background: #fff4f4;
+            border: 1px solid #f1cccc;
+            color: #a33;
+        }
+
+        .profile-photo-preview {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        .profile-photo-preview img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #f4b400;
+        }
+
+        /* ================================
            STUDENTS
         ================================ */
 
@@ -438,19 +551,23 @@
 
             .tutor-info-grid,
             .profile-grid,
-            .student-details-grid {
+            .student-details-grid,
+            .edit-form-grid {
                 grid-template-columns: 1fr;
             }
 
-            .profile-item.full {
+            .profile-item.full,
+            .edit-form-group.full {
                 grid-column: auto;
             }
 
-            .dashboard-actions {
+            .dashboard-actions,
+            .edit-profile-actions {
                 flex-direction: column;
             }
 
-            .dashboard-actions .btn {
+            .dashboard-actions .btn,
+            .edit-profile-actions .btn {
                 width: 100%;
             }
 
@@ -649,6 +766,270 @@
 
 
     <!-- ================================
+         EDIT PROFILE
+    ================================= -->
+
+    <section
+        class="dashboard-panel"
+        id="editProfileSection"
+        style="display: none;">
+
+        <div class="dashboard-panel-header">
+
+            <div>
+
+                <h2>
+                    Edit My Profile
+                </h2>
+
+                <p>
+                    Update the information displayed on your
+                    EDUVIA tutor profile.
+                </p>
+
+            </div>
+
+            <div class="dashboard-icon">
+                ✏️
+            </div>
+
+        </div>
+
+
+        <form
+            id="editProfileForm"
+            class="edit-profile-form">
+
+            <div class="edit-form-grid">
+
+                <div class="edit-form-group">
+
+                    <label for="editFullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editFullName"
+                        required>
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="editPhone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="editPhone"
+                        required>
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="editEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="editEmail"
+                        class="email-readonly"
+                        readonly>
+
+                    <div class="edit-help-text">
+                        Your login email cannot be changed here.
+                    </div>
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="editSchool">
+                        School / Institution
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editSchool"
+                        required>
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="editLevel">
+                        Current Level
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editLevel"
+                        required>
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="editLocation">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editLocation"
+                        required>
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="editSubjects">
+                        Subjects
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editSubjects"
+                        placeholder="Example: Mathematics, Physics, Chemistry"
+                        required>
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="editStudents">
+                        Students / Classes You Teach
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editStudents"
+                        placeholder="Example: Form 1 - Upper Sixth">
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="editTeachingFormat">
+                        Teaching Format
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editTeachingFormat"
+                        placeholder="Example: Home, Online, Physical">
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="editExperience">
+                        Experience
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editExperience"
+                        placeholder="Example: 2 years">
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="editQualification">
+                        Qualification
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editQualification">
+
+                </div>
+
+
+                <div class="edit-form-group full">
+
+                    <label for="editAbout">
+                        About Me
+                    </label>
+
+                    <textarea
+                        id="editAbout"
+                        placeholder="Tell students a little about yourself and your teaching approach."></textarea>
+
+                </div>
+
+
+                <div class="edit-form-group full">
+
+                    <label for="editProfilePicture">
+                        Profile Picture
+                    </label>
+
+                    <div
+                        id="profilePhotoPreview"
+                        class="profile-photo-preview">
+                    </div>
+
+                    <input
+                        type="file"
+                        id="editProfilePicture"
+                        accept="image/*">
+
+                    <div class="edit-help-text">
+                        Choose a clear photo of yourself. JPG, PNG and
+                        other common image formats are supported.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="editProfileMessage"
+                class="edit-profile-message">
+            </div>
+
+
+            <div class="edit-profile-actions">
+
+                <button
+                    type="submit"
+                    class="btn"
+                    id="saveProfileButton">
+                    Save Changes
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-outline"
+                    id="cancelEditButton">
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- ================================
          STUDENTS
     ================================= -->
 
@@ -750,7 +1131,7 @@
     </p>
 
     <p>
-        © 2026 EDUVIA. All Rights Reserved.
+        ©️ 2026 EDUVIA. All Rights Reserved.
     </p>
 
 </footer>
@@ -780,6 +1161,35 @@ const welcomeMessage =
 
 const logoutButton =
     document.getElementById("logoutButton");
+
+const editProfileSection =
+    document.getElementById("editProfileSection");
+
+const editProfileForm =
+    document.getElementById("editProfileForm");
+
+const editProfileMessage =
+    document.getElementById("editProfileMessage");
+
+const saveProfileButton =
+    document.getElementById("saveProfileButton");
+
+const cancelEditButton =
+    document.getElementById("cancelEditButton");
+
+const editProfilePicture =
+    document.getElementById("editProfilePicture");
+
+const profilePhotoPreview =
+    document.getElementById("profilePhotoPreview");
+
+
+/* ================================
+   CURRENT DATA
+================================ */
+
+let currentUser = null;
+let currentTutor = null;
 
 
 /* ================================
@@ -849,6 +1259,474 @@ function getInitials(name) {
 
 
 /* ================================
+   SHOW MESSAGE
+================================ */
+
+function showEditMessage(
+    message,
+    type
+) {
+
+    editProfileMessage.textContent =
+        message;
+
+    editProfileMessage.className =
+        `edit-profile-message ${type}`;
+
+}
+
+
+/* ================================
+   HIDE EDIT FORM
+================================ */
+
+function hideEditProfile() {
+
+    editProfileSection.style.display =
+        "none";
+
+    editProfileMessage.textContent =
+        "";
+
+    editProfileMessage.className =
+        "edit-profile-message";
+
+}
+
+
+/* ================================
+   SHOW EDIT FORM
+================================ */
+
+function showEditProfile() {
+
+    if (!currentTutor) {
+        return;
+    }
+
+    document.getElementById(
+        "editFullName"
+    ).value =
+        currentTutor.full_name || "";
+
+    document.getElementById(
+        "editPhone"
+    ).value =
+        currentTutor.phone || "";
+
+    document.getElementById(
+        "editEmail"
+    ).value =
+        currentUser?.email || "";
+
+    document.getElementById(
+        "editSchool"
+    ).value =
+        currentTutor.school || "";
+
+    document.getElementById(
+        "editLevel"
+    ).value =
+        currentTutor.level || "";
+
+    document.getElementById(
+        "editLocation"
+    ).value =
+        currentTutor.location || "";
+
+    document.getElementById(
+        "editSubjects"
+    ).value =
+        currentTutor.subjects || "";
+
+    document.getElementById(
+        "editStudents"
+    ).value =
+        currentTutor.students || "";
+
+    document.getElementById(
+        "editTeachingFormat"
+    ).value =
+        currentTutor.teaching_format || "";
+
+    document.getElementById(
+        "editExperience"
+    ).value =
+        currentTutor.experience || "";
+
+    document.getElementById(
+        "editQualification"
+    ).value =
+        currentTutor.qualification || "";
+
+    document.getElementById(
+        "editAbout"
+    ).value =
+        currentTutor.about || "";
+
+
+    profilePhotoPreview.innerHTML =
+        currentTutor.profile_picture
+            ? `
+                <img
+                    src="${escapeHTML(
+                        currentTutor.profile_picture
+                    )}"
+                    alt="Current profile picture">
+              `
+            : `
+                <div class="profile-initials">
+                    ${escapeHTML(
+                        getInitials(
+                            currentTutor.full_name
+                        )
+                    )}
+                </div>
+              `;
+
+
+    editProfilePicture.value = "";
+
+    editProfileMessage.textContent =
+        "";
+
+    editProfileMessage.className =
+        "edit-profile-message";
+
+
+    editProfileSection.style.display =
+        "block";
+
+
+    editProfileSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
+
+
+/* ================================
+   DISPLAY ACCOUNT
+================================ */
+
+function displayAccount(profile) {
+
+    accountInfo.innerHTML = `
+
+        <div class="tutor-info-grid">
+
+            <div class="tutor-info-item">
+
+                <span>
+                    Full Name
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        profile.full_name ||
+                        "Not provided"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="tutor-info-item">
+
+                <span>
+                    Email Address
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        profile.email ||
+                        currentUser?.email ||
+                        "Not provided"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="tutor-info-item">
+
+                <span>
+                    Phone Number
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        profile.phone ||
+                        "Not provided"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="tutor-info-item">
+
+                <span>
+                    Account Type
+                </span>
+
+                <strong>
+                    Tutor
+                </strong>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ================================
+   DISPLAY TUTOR PROFILE
+================================ */
+
+function displayTutorProfile(tutor) {
+
+    let profileImage;
+
+
+    if (tutor.profile_picture) {
+
+        profileImage = `
+
+            <img
+                src="${escapeHTML(
+                    tutor.profile_picture
+                )}"
+                class="profile-image"
+                alt="Tutor profile picture">
+
+        `;
+
+    } else {
+
+        profileImage = `
+
+            <div class="profile-initials">
+
+                ${escapeHTML(
+                    getInitials(
+                        tutor.full_name
+                    )
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+
+    tutorProfile.innerHTML = `
+
+        <div class="profile-header">
+
+            ${profileImage}
+
+            <div>
+
+                <h3>
+                    ${escapeHTML(
+                        tutor.full_name ||
+                        "EDUVIA Tutor"
+                    )}
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        tutor.school ||
+                        "School not provided"
+                    )}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-grid">
+
+            <div class="profile-item">
+
+                <span>
+                    Current Level
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        tutor.level ||
+                        "Not provided"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span>
+                    Location
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        tutor.location ||
+                        "Not provided"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span>
+                    Subjects
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        tutor.subjects ||
+                        "Not provided"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span>
+                    Students
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        tutor.students ||
+                        "Not provided"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span>
+                    Teaching Format
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        tutor.teaching_format ||
+                        "Not provided"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span>
+                    Application Status
+                </span>
+
+                <strong>
+                    ${statusBadge(
+                        tutor.status ||
+                        "Pending"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span>
+                    Experience
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        tutor.experience ||
+                        "Not provided"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span>
+                    Qualification
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        tutor.qualification ||
+                        "Not provided"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item full">
+
+                <span>
+                    About Me
+                </span>
+
+                <div class="profile-about">
+
+                    ${escapeHTML(
+                        tutor.about ||
+                        "No description provided."
+                    )}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-actions">
+
+            <button
+                type="button"
+                class="btn"
+                id="editProfileButton">
+                Edit My Profile
+            </button>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("editProfileButton")
+        .addEventListener(
+            "click",
+            showEditProfile
+        );
+
+}
+
+
+/* ================================
    LOAD DASHBOARD
 ================================ */
 
@@ -886,7 +1764,7 @@ async function loadTutorDashboard() {
         }
 
 
-        const user =
+        currentUser =
             session.user;
 
 
@@ -901,7 +1779,7 @@ async function loadTutorDashboard() {
             await supabaseClient
                 .from("user_profiles")
                 .select("*")
-                .eq("id", user.id)
+                .eq("id", currentUser.id)
                 .single();
 
 
@@ -973,74 +1851,7 @@ async function loadTutorDashboard() {
            ACCOUNT
         ============================ */
 
-        accountInfo.innerHTML = `
-
-            <div class="tutor-info-grid">
-
-                <div class="tutor-info-item">
-
-                    <span>
-                        Full Name
-                    </span>
-
-                    <strong>
-                        ${escapeHTML(
-                            profile.full_name ||
-                            "Not provided"
-                        )}
-                    </strong>
-
-                </div>
-
-
-                <div class="tutor-info-item">
-
-                    <span>
-                        Email Address
-                    </span>
-
-                    <strong>
-                        ${escapeHTML(
-                            profile.email ||
-                            user.email ||
-                            "Not provided"
-                        )}
-                    </strong>
-
-                </div>
-
-
-                <div class="tutor-info-item">
-
-                    <span>
-                        Phone Number
-                    </span>
-
-                    <strong>
-                        ${escapeHTML(
-                            profile.phone ||
-                            "Not provided"
-                        )}
-                    </strong>
-
-                </div>
-
-
-                <div class="tutor-info-item">
-
-                    <span>
-                        Account Type
-                    </span>
-
-                    <strong>
-                        Tutor
-                    </strong>
-
-                </div>
-
-            </div>
-
-        `;
+        displayAccount(profile);
 
 
         /* ============================
@@ -1054,7 +1865,10 @@ async function loadTutorDashboard() {
             await supabaseClient
                 .from("tutor_applications")
                 .select("*")
-                .eq("user_id", user.id)
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
                 .order("id", {
                     ascending: false
                 })
@@ -1066,7 +1880,7 @@ async function loadTutorDashboard() {
         }
 
 
-        const tutor =
+        currentTutor =
             tutors && tutors.length
                 ? tutors[0]
                 : null;
@@ -1076,7 +1890,7 @@ async function loadTutorDashboard() {
            NO PROFILE
         ============================ */
 
-        if (!tutor) {
+        if (!currentTutor) {
 
             tutorProfile.innerHTML = `
 
@@ -1094,6 +1908,7 @@ async function loadTutorDashboard() {
                 </div>
 
             `;
+
 
             myStudents.innerHTML = `
 
@@ -1121,225 +1936,13 @@ async function loadTutorDashboard() {
 
         else {
 
-            let profileImage;
-
-
-            if (tutor.profile_picture) {
-
-                profileImage = `
-
-                    <img
-                        src="${escapeHTML(
-                            tutor.profile_picture
-                        )}"
-                        class="profile-image"
-                        alt="Tutor profile picture">
-
-                `;
-
-            } else {
-
-                profileImage = `
-
-                    <div class="profile-initials">
-
-                        ${escapeHTML(
-                            getInitials(
-                                tutor.full_name
-                            )
-                        )}
-
-                    </div>
-
-                `;
-
-            }
-
-
-            tutorProfile.innerHTML = `
-
-                <div class="profile-header">
-
-                    ${profileImage}
-
-                    <div>
-
-                        <h3>
-                            ${escapeHTML(
-                                tutor.full_name ||
-                                "EDUVIA Tutor"
-                            )}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(
-                                tutor.school ||
-                                "School not provided"
-                            )}
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="profile-grid">
-
-                    <div class="profile-item">
-
-                        <span>
-                            Current Level
-                        </span>
-
-                        <strong>
-                            ${escapeHTML(
-                                tutor.level ||
-                                "Not provided"
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="profile-item">
-
-                        <span>
-                            Location
-                        </span>
-
-                        <strong>
-                            ${escapeHTML(
-                                tutor.location ||
-                                "Not provided"
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="profile-item">
-
-                        <span>
-                            Subjects
-                        </span>
-
-                        <strong>
-                            ${escapeHTML(
-                                tutor.subjects ||
-                                "Not provided"
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="profile-item">
-
-                        <span>
-                            Students
-                        </span>
-
-                        <strong>
-                            ${escapeHTML(
-                                tutor.students ||
-                                "Not provided"
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="profile-item">
-
-                        <span>
-                            Teaching Format
-                        </span>
-
-                        <strong>
-                            ${escapeHTML(
-                                tutor.teaching_format ||
-                                "Not provided"
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="profile-item">
-
-                        <span>
-                            Application Status
-                        </span>
-
-                        <strong>
-                            ${statusBadge(
-                                tutor.status ||
-                                "Pending"
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="profile-item">
-
-                        <span>
-                            Experience
-                        </span>
-
-                        <strong>
-                            ${escapeHTML(
-                                tutor.experience ||
-                                "Not provided"
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="profile-item">
-
-                        <span>
-                            Qualification
-                        </span>
-
-                        <strong>
-                            ${escapeHTML(
-                                tutor.qualification ||
-                                "Not provided"
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="profile-item full">
-
-                        <span>
-                            About Me
-                        </span>
-
-                        <div class="profile-about">
-
-                            ${escapeHTML(
-                                tutor.about ||
-                                "No description provided."
-                            )}
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            /* ============================
-               LOAD STUDENTS
-            ============================ */
-
-            await loadStudents(tutor.id);
+            displayTutorProfile(
+                currentTutor
+            );
+
+            await loadStudents(
+                currentTutor.id
+            );
 
         }
 
@@ -1348,7 +1951,9 @@ async function loadTutorDashboard() {
            NOTIFICATIONS
         ============================ */
 
-        await loadNotifications(user);
+        await loadNotifications(
+            currentUser
+        );
 
 
     }
@@ -1392,6 +1997,459 @@ async function loadTutorDashboard() {
 
 
 /* ================================
+   EDIT PROFILE SUBMIT
+================================ */
+
+editProfileForm.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+
+        if (
+            !currentUser ||
+            !currentTutor
+        ) {
+
+            showEditMessage(
+                "Your tutor profile could not be loaded.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        saveProfileButton.disabled =
+            true;
+
+        saveProfileButton.textContent =
+            "Saving...";
+
+
+        showEditMessage(
+            "",
+            ""
+        );
+
+
+        try {
+
+            /* ========================
+               GET FORM VALUES
+            ======================== */
+
+            const fullName =
+                document
+                    .getElementById(
+                        "editFullName"
+                    )
+                    .value
+                    .trim();
+
+            const phone =
+                document
+                    .getElementById(
+                        "editPhone"
+                    )
+                    .value
+                    .trim();
+
+            const school =
+                document
+                    .getElementById(
+                        "editSchool"
+                    )
+                    .value
+                    .trim();
+
+            const level =
+                document
+                    .getElementById(
+                        "editLevel"
+                    )
+                    .value
+                    .trim();
+
+            const location =
+                document
+                    .getElementById(
+                        "editLocation"
+                    )
+                    .value
+                    .trim();
+
+            const subjects =
+                document
+                    .getElementById(
+                        "editSubjects"
+                    )
+                    .value
+                    .trim();
+
+            const students =
+                document
+                    .getElementById(
+                        "editStudents"
+                    )
+                    .value
+                    .trim();
+
+            const teachingFormat =
+                document
+                    .getElementById(
+                        "editTeachingFormat"
+                    )
+                    .value
+                    .trim();
+
+            const experience =
+                document
+                    .getElementById(
+                        "editExperience"
+                    )
+                    .value
+                    .trim();
+
+            const qualification =
+                document
+                    .getElementById(
+                        "editQualification"
+                    )
+                    .value
+                    .trim();
+
+            const about =
+                document
+                    .getElementById(
+                        "editAbout"
+                    )
+                    .value
+                    .trim();
+
+
+            if (
+                !fullName ||
+                !phone ||
+                !school ||
+                !level ||
+                !location ||
+                !subjects
+            ) {
+
+                throw new Error(
+                    "Please fill in all required fields."
+                );
+
+            }
+
+
+            /* ========================
+               PROFILE PICTURE
+            ======================== */
+
+            let profilePicture =
+                currentTutor.profile_picture ||
+                null;
+
+
+            const selectedFile =
+                editProfilePicture.files[0];
+
+
+            if (selectedFile) {
+
+                if (
+                    !selectedFile.type.startsWith(
+                        "image/"
+                    )
+                ) {
+
+                    throw new Error(
+                        "Please select a valid image file."
+                    );
+
+                }
+
+
+                if (
+                    selectedFile.size >
+                    5 * 1024 * 1024
+                ) {
+
+                    throw new Error(
+                        "Profile picture must be smaller than 5 MB."
+                    );
+
+                }
+
+
+                const fileExtension =
+                    selectedFile.name
+                        .split(".")
+                        .pop()
+                        .toLowerCase();
+
+
+                const filePath =
+                    `${currentUser.id}/profile-${Date.now()}.${fileExtension}`;
+
+
+                const {
+                    error: uploadError
+                } =
+                    await supabaseClient
+                        .storage
+                        .from("tutor-profiles")
+                        .upload(
+                            filePath,
+                            selectedFile,
+                            {
+                                upsert: false,
+                                contentType:
+                                    selectedFile.type
+                            }
+                        );
+
+
+                if (uploadError) {
+                    throw uploadError;
+                }
+
+
+                const {
+                    data: publicUrlData
+                } =
+                    supabaseClient
+                        .storage
+                        .from("tutor-profiles")
+                        .getPublicUrl(
+                            filePath
+                        );
+
+
+                profilePicture =
+                    publicUrlData.publicUrl;
+
+            }
+
+
+            /* ========================
+               UPDATE TUTOR APPLICATION
+            ======================== */
+
+            const {
+                data: updatedTutor,
+                error: updateError
+            } =
+                await supabaseClient
+                    .from("tutor_applications")
+                    .update({
+                        full_name: fullName,
+                        phone: phone,
+                        school: school,
+                        level: level,
+                        location: location,
+                        subjects: subjects,
+                        students: students,
+                        teaching_format:
+                            teachingFormat,
+                        experience: experience,
+                        qualification:
+                            qualification,
+                        about: about,
+                        profile_picture:
+                            profilePicture
+                    })
+                    .eq(
+                        "id",
+                        currentTutor.id
+                    )
+                    .eq(
+                        "user_id",
+                        currentUser.id
+                    )
+                    .select()
+                    .single();
+
+
+            if (updateError) {
+                throw updateError;
+            }
+
+
+            /* ========================
+               UPDATE USER PROFILE
+            ======================== */
+
+            const {
+                error: userProfileError
+            } =
+                await supabaseClient
+                    .from("user_profiles")
+                    .update({
+                        full_name: fullName,
+                        phone: phone
+                    })
+                    .eq(
+                        "id",
+                        currentUser.id
+                    );
+
+
+            if (userProfileError) {
+                throw userProfileError;
+            }
+
+
+            /* ========================
+               UPDATE LOCAL DATA
+            ======================== */
+
+            currentTutor =
+                updatedTutor;
+
+
+            displayTutorProfile(
+                currentTutor
+            );
+
+
+            displayAccount({
+                full_name: fullName,
+                email:
+                    currentUser.email,
+                phone: phone
+            });
+
+
+            welcomeMessage.textContent =
+                `Welcome back, ${fullName}`;
+
+
+            /* ========================
+               SUCCESS
+            ======================== */
+
+            showEditMessage(
+                "Your profile has been updated successfully.",
+                "success"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    hideEditProfile();
+
+                },
+                1800
+            );
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Profile update error:",
+                error
+            );
+
+
+            showEditMessage(
+                error.message ||
+                "Unable to update your profile.",
+                "error"
+            );
+
+        }
+
+        finally {
+
+            saveProfileButton.disabled =
+                false;
+
+            saveProfileButton.textContent =
+                "Save Changes";
+
+        }
+
+    }
+);
+
+
+/* ================================
+   PROFILE PHOTO PREVIEW
+================================ */
+
+editProfilePicture.addEventListener(
+    "change",
+    function () {
+
+        const file =
+            this.files[0];
+
+        if (!file) {
+            return;
+        }
+
+
+        if (
+            !file.type.startsWith(
+                "image/"
+            )
+        ) {
+
+            showEditMessage(
+                "Please select a valid image file.",
+                "error"
+            );
+
+            this.value = "";
+
+            return;
+
+        }
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function (event) {
+
+                profilePhotoPreview.innerHTML = `
+
+                    <img
+                        src="${event.target.result}"
+                        alt="New profile picture preview">
+
+                `;
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+/* ================================
+   CANCEL EDIT
+================================ */
+
+cancelEditButton.addEventListener(
+    "click",
+    hideEditProfile
+);
+
+
+/* ================================
    LOAD STUDENTS
 ================================ */
 
@@ -1404,7 +2462,10 @@ async function loadStudents(tutorId) {
         await supabaseClient
             .from("tutor_matches")
             .select("*")
-            .eq("tutor_id", tutorId)
+            .eq(
+                "tutor_id",
+                tutorId
+            )
             .order("id", {
                 ascending: false
             });
